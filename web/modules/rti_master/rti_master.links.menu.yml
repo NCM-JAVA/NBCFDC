@@ -1,0 +1,5 @@
+nbcfdc.rti_master:
+  title: 'Master Rti'
+  parent: master.nbcfdc_master
+  description: 'Update your Website From Here'
+  route_name: nbcfdc.rti_master

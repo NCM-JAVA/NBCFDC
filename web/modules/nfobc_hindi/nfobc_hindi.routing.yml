@@ -1,0 +1,45 @@
+nfobc_hindi.nfobc_hindi_setting:
+  path: '/admin/nfobc_hindi'
+  defaults:
+    _controller: Drupal\nfobc_hindi\Controller\NfobchindiController::Nfobc_hindi_listing
+    # _title: 'Add Edit and Delete the Nfobc'
+  requirements:
+    #_permission: 'access administration pages'
+    _role: 'administrator+rti_content_manager'
+    
+nfobc_hindi.nfobc_hindi_add:
+  path: '/admin/nfobc_hindi/add'
+  defaults:
+    _form: Drupal\nfobc_hindi\Form\addnfobc
+    # _title: 'Add Nfobc'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'    
+    
+nfobc_hindi.nfobc_hindi_edit:
+  path: '/admin/nfobc_hindi/edit/{id}'
+  defaults:
+    _form: Drupal\nfobc_hindi\Form\editnfobc
+    _title: 'Edit Rti'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'
+    
+nfobc_hindi.nfobc_hindi_delete:
+  path: '/admin/nfobc_hindi/delete/{id}'
+  defaults:
+    _form: Drupal\nfobc\Form\deletenfobc
+    _title: 'Delete Nfobc'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'
+    
+nfobc_hindi_front:
+  path: '/nfobc_hindi/{ln}'
+  defaults:
+    _controller: Drupal\nfobc_hindi\Controller\NfobchindiController::front_nfobc_hindi
+    # _title: 'Tenders'
+  requirements:
+    _permission: 'access content'
+    
+    

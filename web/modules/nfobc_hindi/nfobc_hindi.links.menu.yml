@@ -1,0 +1,5 @@
+nfobc_hindi.nfobc_hindi_setting:
+  title: 'NFOBC HINDI'
+  parent: nbcfdc_hindi.nbcfdc_hindi_setting
+  description: 'Update your Website From Here'
+  route_name: nfobc_hindi.nfobc_hindi_setting

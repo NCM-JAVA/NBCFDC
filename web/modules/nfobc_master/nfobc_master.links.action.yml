@@ -1,0 +1,5 @@
+nbcfdc.nfobc_add:
+  route_name: nbcfdc.nfobc_master_add
+  title: 'ADD Nfobc'
+  appears_on:
+    - nbcfdc.nfobc_master

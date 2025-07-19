@@ -1,0 +1,5 @@
+nfobc.nfobc_add:
+  route_name: nfobc.nfobc_add
+  title: 'Add NFOBC'
+  appears_on:
+    - nfobc.nfobc_setting

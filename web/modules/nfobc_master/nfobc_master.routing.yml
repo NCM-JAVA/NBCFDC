@@ -1,0 +1,38 @@
+nbcfdc.nfobc_master:
+  path: '/admin/masternfobc'
+  defaults:
+    _controller: Drupal\nfobc_master\Controller\Nfobc_master::Nfobc_master_listing
+    _title: 'Add Edit and Delete the Master Nfobc Name'
+  requirements:
+    #_permission: 'access administration pages'
+   _role: 'administrator+rti_content_manager'
+    
+nbcfdc.nfobc_master_add:
+  path: '/admin/masternfobc/add'
+  defaults:
+    _form: Drupal\nfobc_master\Form\addnfobc_master
+    _title: 'Add Nfobc'
+  requirements:
+    #_permission: 'access administration pages'
+    _role: 'administrator+rti_content_manager'     
+    
+nbcfdc.nfobcmaster_edit:
+  path: '/admin/master-nfobc/edit/{id}'
+  defaults:
+    _form: Drupal\nfobc_master\Form\editnfobc_master
+    _title: 'Edit Nfobc Master'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'
+    
+nbcfdc.nfobcmaster_delete:
+  path: '/admin/master-nfobc/delete/{id}'
+  defaults:
+    _form: Drupal\nfobc_master\Form\deletenfobc_master
+    _title: 'Are You Sure to want delete?'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'
+
+    
+    

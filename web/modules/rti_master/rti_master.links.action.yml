@@ -1,0 +1,5 @@
+nbcfdc.rti_add:
+  route_name: nbcfdc.rti_master_add
+  title: 'ADD RTI'
+  appears_on:
+    - nbcfdc.rti_master

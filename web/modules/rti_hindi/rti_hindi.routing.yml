@@ -1,0 +1,45 @@
+rti_hindi.rti_hindi_setting:
+  path: '/admin/rti_hindi'
+  defaults:
+    _controller: Drupal\rti_hindi\Controller\RtihindiController::Rti_hindi_listing
+    # _title: 'Add Edit and Delete the Rti'
+  requirements:
+    #_permission: 'access administration pages'
+    _role: 'administrator+rti_content_manager'
+    
+rti_hindi.rti_hindi_add:
+  path: '/admin/rti_hindi_hindi/add'
+  defaults:
+    _form: Drupal\rti_hindi\Form\addrti
+    # _title: 'Add Rti'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'    
+    
+rti_hindi.rti_hindi_edit:
+  path: '/admin/rti_hindi/edit/{id}'
+  defaults:
+    _form: Drupal\rti_hindi\Form\editrti
+    _title: 'Edit Rti'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'
+    
+rti_hindi.rti_hindi_delete:
+  path: '/admin/rti_hindi/delete/{id}'
+  defaults:
+    _form: Drupal\rti_hindi\Form\deleterti
+    _title: 'Delete Rti'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'
+    
+rti_hindi_front:
+  path: '/rti_hindi/{ln}'
+  defaults:
+    _controller: Drupal\rti_hindi\Controller\RtihindiController::front_rti_hindi
+    # _title: 'Tenders'
+  requirements:
+    _permission: 'access content'
+    
+    

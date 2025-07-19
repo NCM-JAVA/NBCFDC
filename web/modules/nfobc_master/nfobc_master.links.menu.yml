@@ -1,0 +1,5 @@
+nbcfdc.nfobc_master:
+  title: 'Master Nfobc'
+  parent: master.nbcfdc_master
+  description: 'Update your Website From Here'
+  route_name: nbcfdc.nfobc_master

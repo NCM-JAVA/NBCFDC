@@ -1,0 +1,5 @@
+nfobc_hindi.nfobc_hindi_add:
+  route_name: nfobc_hindi.nfobc_hindi_add
+  # title: 'Add NFOBC'
+  appears_on:
+    - nfobc_hindi.nfobc_hindi_setting

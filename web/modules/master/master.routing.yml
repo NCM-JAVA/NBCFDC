@@ -1,0 +1,9 @@
+master.nbcfdc_master:
+  path: '/admin/nbcfdc/master'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Masters for NBCFDC Settting'
+  requirements:
+    #_permission: 'access administration pages'
+    _role: 'administrator+rti_content_manager'
+    

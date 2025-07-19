@@ -1,0 +1,5 @@
+rti_child.rti_child_setting:
+  title: 'RTI Sublink (Dashboard)'
+  parent: nbcfdc.nbcfdc_setting
+  description: 'Update your Website From Here'
+  route_name: rti_child.rti_child_setting

@@ -1,0 +1,7 @@
+name: Unee Header Structure
+description: This module is using for the header section design.
+core_version_requirement: ^8.8.0 || ^9.0 || ^10
+dependencies:
+- node
+- block
+type: module

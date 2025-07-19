@@ -1,0 +1,46 @@
+@charset "utf-8";
+ @media print {
+	 
+	 *, html, body { color:#000 !important;}
+	 .topbar ul.accessibility-icons {display:block !important; width:500px;}
+	 .topbar ul.accessibility-icons li { float:left !important;}
+    .topbar .col-lg-4.col-md-4.col-sm-12{ width:350px !important; }
+    .topbar .col-lg-4.col-md-4{ background: red !important;}
+    .topbar .col-lg-8.col-md-8{ background: yellow !important;}
+	.topbar .col-lg-8.col-md-8.col-sm-12{ width:580px !important; }
+	.topbar ul.accessibility-icons li {padding: 6px 4px !important; border:solid 1px #000 !important;}
+	li.theme-changer .inner { display:none !important;}
+	.header-wrapper .col-lg-6.col-md-6{  width:400px !important;}
+	ul.sf-menu li { border:solid 1px #000 !important; margin-right:10px !important; margin-bottom:10px !important;}
+	.minister-home { width:900px!important;}
+	.minister-widget li { float:left; width:48% !important; border:solid 1px #000 !important; margin-right:20px !important;}
+	.minister-widget li:last-child {   margin-right:0px !important;}
+	.domestic-traffic, 
+	.international-traffic, 
+	.on-time-performance, 
+	.passenger-load-factor, 
+	.udan-rcs,
+	.by-volume, .by-type, .by-entity, .airports, .drones, .cargo-in-mt, .krishi-udan, .skilling-by-aassc, .skilling-by-rgnau,
+    .views-element-container { border:solid 1px #000 !important; margin-bottom:20px !important;}
+	.content-info-cards { min-height:200px !important;}
+	
+	.content-info-cards { border:0 !important;}
+	.minister-widget {min-height:300px !important;}
+	.domestic-traffic .content-info-cards .card-body ul li, 
+	.international-traffic .content-info-cards .card-body ul li {border:solid 1px #000 !important; min-height: 95px!important;}
+	.content-info-cards .card-body ul li,
+    .content-info-cards .card-body ul li { width:31% !important; float:left !important; border:solid 1px #000 !important;}
+  
+   .content-info-cards .card-body ul{display: flex;flex-wrap: wrap; width:100% !important;}
+   .content-info-cards .card-body ul li{width: 31% !important;}
+   .notice-ticker + .container .col-lg-4{width:100% !important;  float:left !important;}
+   .card .card-header h2 { border:none !important;}
+   .flying-training-organizations.card.content-info-cards ul li,
+   .flying-training-organizations.card.content-info-cards ul li,
+   .krishi-udan.card,
+   #block-views-block-krishi-skilling-block-block-1 .card .card-body ul li, 
+   #block-views-block-krishi-skilling-block-block-1 .card .card-body ul li{min-height:auto !important;; height:auto !important;}
+   .flying-training-organizations.card.content-info-cards ul li{display:block !important;}
+   .flying-training-organizations.card.content-info-cards ul li {max-height: 100px !important; min-height: 100px !important; height: 100px !important;}
+   
+}

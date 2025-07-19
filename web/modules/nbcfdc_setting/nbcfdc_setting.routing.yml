@@ -1,0 +1,10 @@
+nbcfdc.nbcfdc_setting:
+  path: '/admin/nbcfdcwebsetting'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'NBCFDC Settting'
+  requirements:
+    # _permission: 'access administration pages'
+    _role: 'administrator+rti_content_manager'
+ 
+    

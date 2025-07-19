@@ -1,0 +1,57 @@
+<?php
+/**
+ * Implements hook_theme().
+ */
+function uneevisitor_theme() {
+  return [
+    'uneevisitor_block' => [
+      'variables' => [
+        'data' => [],
+        //'tmp' => $tmp,
+      ],
+    ],
+  ];
+}
+/**
+*@file
+*Implementing the cron hook functions.
+*/
+function visitor_count(){
+	//$loader = \Drupal::service('domain.loader');
+	$current_domain = $loader->getActiveId();
+	$count = check_exist_domain($current_domain);
+	//die('count:'.$current_domain); 
+	$database = \Drupal::database();
+	if($count !== 0){ //update
+		$count = $count + 1;
+		$database->update('unee_visitor')
+			->fields(['visitor_count' => $count])
+			->condition('domain_id', "$current_domain", '=')
+			->execute(); 
+		return $count;
+	}else{ //insert
+		$result = $database->insert('unee_visitor')
+			->fields([
+				'domain_id' => "$current_domain",
+				'visitor_count' => 1,
+			])->execute();
+		  return 1;
+	}
+	return $current_domain;
+} 
+
+function check_exist_domain($domain_id){
+	$database = \Drupal::database();
+	$query = $database->select('unee_visitor', 'uv');
+	$query->fields('uv', ['visitor_count']);
+	$query->condition('domain_id',"$domain_id",'=');
+	$result = $query->execute();
+	$data = $result->fetchAssoc();
+	if(!isset($data['visitor_count'])){
+		return 0;
+	}else{
+		return $data['visitor_count'];
+	}
+	
+} 
+

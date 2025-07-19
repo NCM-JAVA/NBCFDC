@@ -1,0 +1,12 @@
+name: Rti Sublinks Module
+type: module
+description: 'Manages the Rti Sublink Module'
+package: Custom
+# version: VERSION
+# core: 8.x
+
+# Information added by Drupal.org packaging script on 2019-03-13
+# version: '8.6.11'
+core_version_requirement: ^10
+project: 'drupal'
+datestamp: 1552511636

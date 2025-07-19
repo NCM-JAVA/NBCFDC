@@ -1,0 +1,5 @@
+nbcfdc.nbcfdc_setting:
+  title: 'NBCFDC WEB SETTING'
+  parent: system.admin
+  description: 'Update your Website From Here'
+  route_name: nbcfdc.nbcfdc_setting

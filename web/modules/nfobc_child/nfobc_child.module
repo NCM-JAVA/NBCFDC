@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Manages displaying online help.
+ */
+
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+
+
+/**
+ * Implements hook_theme().
+ */
+
+
+/**
+ * Implements hook_block_view_BASE_BLOCK_ID_alter().
+ */
+
+// function rti_theme($existing, $type, $theme, $path) {
+  // return [
+    // 'rti_template' => [
+      // 'variables' => ['titlemain' => NULL,'descp' => NULL,'name' => NULL],
+    // ],
+	 
+  // ];
+// }

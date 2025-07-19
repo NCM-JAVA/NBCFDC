@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+
+
+{% set input_attributes = attributes %}
+
+{# Check if the input type is hidden and remove autocomplete attribute if so #}
+{% if input_attributes.type == 'hidden' %}
+  {% set input_attributes = input_attributes|without('autocomplete') %}
+{% endif %}
+
+<input{{ input_attributes }} />{{ children }}
+

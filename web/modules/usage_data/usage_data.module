@@ -1,0 +1,135 @@
+<?php
+
+/**
+ * @file
+ * Contains usage_data.module.
+ */
+
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\StreamWrapper\StreamWrapperManager;
+use Drupal\Core\Url;
+use Drupal\usage_data\Event\CollectExtraDataEvent;
+use Drupal\usage_data\Event\RecordingViewEvent;
+use Drupal\usage_data\Event\UsageDataEvents;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_help().
+ */
+function usage_data_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the usage_data module.
+    case 'help.page.usage_data':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Logs statistics for work horse - Right now supporting jobs.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_entity_view() for usage_event.
+ */
+function usage_data_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if (($view_mode === 'full' || $view_mode === 'default') && !$entity->isNew()) {
+    $build['#attached']['library'][] = 'usage_data/entity.statistics';
+    $entity_type_id = $entity->getEntityTypeId();
+    $settings = _usage_data_default_settings($entity->id(), $entity_type_id);
+    if ($entity_type_id === 'media') {
+      $settings['data']['event_type'] = 'download';
+    }
+    $build['#attached']['drupalSettings']['usage_data'] = $settings;
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function usage_data_views_pre_render($view) {
+  /** @var \Drupal\views\ViewExecutable $view */
+  if ($view->getDisplay()->hasPath()) {
+    // For views entity id we are going to concatenate the view id and
+    // the display id.
+    // @todo remember to parse the id in order to retrieve the view and the
+    // display.
+    $entity_id = $view->storage->id() . ':' . $view->current_display;
+    $view->element['#attached']['drupalSettings']['usage_data'] = _usage_data_default_settings($entity_id, 'view');
+    $view->element['#attached']['library'][] = 'usage_data/entity.statistics';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page.
+ */
+function usage_data_preprocess_page(&$variables) {
+  // Implement support for page manager.
+  $current_route = \Drupal::routeMatch()->getRouteObject();
+  if ($current_route && ($variant_id = $current_route->getDefault('page_manager_page_variant'))) {
+    /**
+     * Same approach as for view where we use ':' to concatenate the page
+     * manager id and the variant id.
+     */
+    $entity_id = $current_route->getDefault('page_manager_page') . ':' . $variant_id;
+    $variables['#attached']['drupalSettings']['usage_data'] = _usage_data_default_settings($entity_id, 'page');
+    $variables['#attached']['library'][] = 'usage_data/entity.statistics';
+  }
+}
+
+/**
+ * Implements hook_file_download() for usage_event.
+ */
+function usage_data_file_download($uri) {
+  $target = StreamWrapperManager::getTarget($uri);
+  $fids = \Drupal::entityTypeManager()->getStorage('file')
+    ->getQuery()
+    ->condition('uri', $uri)
+    ->range(0,1)
+    ->accessCheck(FALSE)
+    ->execute();
+  $fid = $fids ? array_key_first($fids) : 0;
+  $current_user = \Drupal::currentUser();
+  $roles = $current_user->getRoles(TRUE);
+  $data['event_type'] = 'download';
+  $data['entity_id'] = $fid;
+  $data['entity_type_id'] = 'file_download';
+  $data['path'] = $target;
+  $data['uid'] = $current_user->id();
+  $data['user_name'] = $current_user->getAccountName();
+  $data['user_role'] = $roles ? implode(',', $roles) : '';
+  \Drupal::service('usage_data.storage.entity')->recordView($data);
+}
+
+function _usage_data_default_settings($entity_id, $entity_type_id): array {
+  $path = \Drupal::service('extension.list.module')->getPath('usage_data');
+  $current_user = \Drupal::currentUser();
+  $roles = $current_user->getRoles(TRUE);
+  $data = [
+    'event_type' => 'view',
+    'entity_id' => $entity_id,
+    'entity_type_id' => $entity_type_id,
+    'path' => \Drupal::service('path.current')->getPath(),
+    'uid' => $current_user->id(),
+    'user_name' => $current_user->getAccountName(),
+    'user_role' => $roles ? implode(',', $roles) : '',
+  ];
+
+  /**
+   * Dispatching this event here so that other module can populate the other
+   * data field. These other module will also be responsible to clean it up
+   * prior to record being inserted.
+   */
+  $event_dispatcher = \Drupal::service('event_dispatcher');
+  $extra_data = [];
+  $event = new CollectExtraDataEvent($extra_data);
+  $event_dispatcher->dispatch(UsageDataEvents::COLLECT_EXTRA_DATA, $event);
+  $data['extra_data'] = json_encode($event->getExtraData());
+
+  return [
+    'data' => $data,
+    'url' => Url::fromUri('base:' . $path . '/usage_data.php')->toString(),
+  ];
+}

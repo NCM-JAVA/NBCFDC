@@ -1,0 +1,5 @@
+rti_hindi.rti_hindi_setting:
+  title: 'RTI Hindi'
+  parent: nbcfdc_hindi.nbcfdc_hindi_setting
+  description: 'Update your Website From Here'
+  route_name: rti_hindi.rti_hindi_setting

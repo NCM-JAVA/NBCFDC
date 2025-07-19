@@ -1,0 +1,36 @@
+nfobc_child.nfobc_child_setting:
+  path: '/admin/nfobc_child'
+  defaults:
+    _controller: Drupal\nfobc_child\Controller\Nfobc_childController::Nfobc_childlisting
+    _title: 'Add Edit and Delete the Nfobc Sublink'
+  requirements:
+    #_permission: 'access administration pages'
+    _role: 'administrator+rti_content_manager'
+nfobc_child.nfobc_add_sublink:
+  path: '/admin/nfobc_child/add_nfobc_sublink'
+  defaults:
+    _form: Drupal\nfobc_child\Form\addnfobc_sublink
+    _title: 'Add nfobc Sublinks'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'
+nfobc_child.nfobc_child_edit:
+  path: '/admin/nfobc_child/edit/{id}'
+  defaults:
+    _form: Drupal\nfobc_child\Form\editnfobc_child
+    _title: 'Edit nfobc Sublinks'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'
+nfobc_child.nfobc_child_delete:
+  path: '/admin/nfobc_child/delete/{id}'
+  defaults:
+    _form: Drupal\nfobc_child\Form\deletenfobc_child
+    _title: 'Delete Nfobc'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'     
+    
+
+    
+    

@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+
+
+</body>
+</html>
+
+<style>body .panel-group .panel+.panel {
+     margin: none;
+}.panel-heading.rtitit{word-wrap: break-word;
+}</style>
+	<h3>{{title}}</h3>
+
+
+	   <div class="col-md-12 col-sm-12">
+            <div class="emergency-info lb">
+              <h5 style="width: 870px;height: 47px; background-color: #fca842; text-align: center;color: white;padding-top: 10px;">{{titlemain}}</h5>
+			 
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<!-- Content Start -->
+                <p><span style="font-family:Arial,Helvetica,sans-serif;"><span lang="EN-US" style="font-size:11.0pt"><span style="line-height:115%">सामाजिक न्याय और अधिकारिता मंत्रालय, सरकार द्वारा वित्त पोषित अन्य पिछड़ा वर्ग (एनएफओबीसी) के लिए राष्ट्रीय फैलोशिप की योजना के कार्यान्वयन के लिए एनबीसीएफडीसी को नोडल एजेंसी के रूप में नामित किया गया है। भारत सरकार, नई दिल्ली। यह योजना उन उम्मीदवारों के लिए खुली है जो अन्य पिछड़ा वर्ग (ओबीसी) से हैं और मानविकी और सामाजिक विज्ञान, इंजीनियरिंग और प्रौद्योगिकी और विज्ञान में नियमित और पूर्णकालिक एम.फिल और पीएचडी डिग्री जैसे उच्च अध्ययन कर रहे हैं। योजना के तहत एनएफओबीसी के लिए स्लॉट की कुल संख्या प्रति वर्ष 1000 है। इस योजना के तहत उपलब्ध 1000 स्लॉट में से 750 यूजीसी की राष्ट्रीय पात्रता परीक्षा- जूनियर रिसर्च फेलोशिप (एनईटी-जेआरएफ) के तहत विषयों के लिए आवंटित किए जाएंगे और शेष 250 यूजीसी-वैज्ञानिक और औद्योगिक अनुसंधान परिषद (यूजीसी-सीएसआईआर) एनईटीजेआरएफ संयुक्त परीक्षा के लिए आवंटित किए जाएंगे। (विज्ञान स्ट्रीम के लिए)। ओबीसी श्रेणी से संबंधित विकलांग व्यक्तियों (पीडब्ल्यूडी) के लिए अनुसंधान विद्वानों को फेलोशिप प्रदान करने पर विचार करने के लिए स्लॉट में 5% आरक्षण का प्रावधान है।</span></span>.</span></p>
+
+                    <p style="margin-top: -35px"><span style="font-family:Arial,Helvetica,sans-serif;">सम्पर्क करने का विवरण:-</span></p>
+
+                    <p style="margin-top: -37px"><span style="font-family:Arial,Helvetica,sans-serif;">संपर्क नंबर. 011-45854421</span></p>
+
+                    <p style="margin-top: -40px"><span style="font-family:Arial,Helvetica,sans-serif;">ईमेल आईडी :- nf-obc@nbcfdc.gov.in</span></p>
+
+                    
+
+                <!-- Content End -->			  
+                <!--Panel Start-->
+				 {% for val in name %}
+                <div class="panel">
+                  <div class="panel-heading" role="tab" id="heading{{val.sr}}">
+                    <h6 style="margin-bottom:10px;width: 870px;height: 47px; background-color: #1e9de0;color: white;padding-top: 10px;"> <a class="rtitit" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{val.sr}}" aria-expanded="true" aria-controls="collapse{{val.sr}}" style="color: white">{{val.sr}}:-{{ val.rtiname | nl2br}}</a> </h6>
+                  </div>
+                  <div id="collapse{{val.sr}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{val.sr}}">
+                    <div class="panel-body">
+                      
+<div class="widget">
+             
+                <div class="categories inner">
+                  <ul>
+					  {% for  vl in val.tname %}
+					   {% set cer = ( cer | default(0) )+1 %}
+					  {% for  child_key,child in vl %}
+					 
+					  {% set brk = child_key|split('@') %}
+					  {% if brk[1]!='' %}
+                      <li><a style="font-size: 13px;" href="{{ url('<front>') }}sites/default/files/myimages/{{ brk[1]}}" target="_BLANK">{{brk[0]}}</a></li>
+					   {% else %}
+					   <li><a style="font-size: 13px;" href="#" data-toggle="collapse" data-target="#demo{{cer}}" >{{brk[0]}}</a></li>
+					   <div id="demo{{cer}}" style="margin-left:30px !important" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{val.sr}}">
+					  {% for childpdf in child %}
+
+					  {% set brkch = childpdf|split('@') %}
+					  
+					  
+                    <div class="panel-body" style="padding:0px !important">
+                      
+<div class="widget">
+             
+                <div class="categories inner">
+                  <ul><li><a href="{{ url('<front>') }}sites/default/files/myimages/{{ brkch[1]}}" target="_BLANK" >
+													{{brkch[0]}}</a></li></ul>
+                                   </div></div></div>
+								{% endfor %}   </div>
+					   {% endif %}
+					   
+					   {% endfor %}
+						{% endfor %}
+                      </ul>
+                </div>
+              </div>
+                    </div>
+                  </div>
+                </div>
+                <!--Panel End--> 
+				{% endfor %}
+              </div>
+			  
+            </div>
+          </div>
+	
+	
+	
+	
+<script>
+
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
+
+			

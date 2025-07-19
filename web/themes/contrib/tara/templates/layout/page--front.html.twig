@@ -1,0 +1,106 @@
+{#
+/**
+ * @file
+ * Tara's theme implementation to display front page.
+ *
+ * The doctype, html, head and body tags are not in this template. Instead they
+ * can be found in the html.html.twig template.
+ *
+ */
+#}
+{% include '@tara/template-parts/header.html.twig' %}
+{% if slider_show %}
+  {% include '@tara/template-parts/slider.html.twig' %}
+{% endif %}
+<div id="main-wrapper" class="main-wrapper">
+  <div class="">
+    {% if front_sidebar %}
+      <div class="main-container">
+    {% endif %}
+    <main id="front-main" class="homepage-content page-content">
+      <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+      {% include '@tara/template-parts/content_top.html.twig' %}
+
+<div class="row container">
+<div class="col-sm-1 my-2">
+  <div class="d-flex NewsBgArea ">
+  <div class="newsHd">
+  {% if url('<current>')|render|replace({'/hi/': ''}) == url('<current>')|render %}
+  {# English content #}
+  <span style="background-color: #075E8D; color:white;padding:0px;">Bulletins</span></div>
+{% else %}
+  {# Hindi content #}
+  <span style="background-color: #075E8D; color:white;padding:0px;">बुलेटिन</span></div>
+{% endif %}
+  </div>
+  </div>
+  <div class="col-md-11 mt-2">
+   {% if page.home %}
+        {{ page.bullitan }}
+      {% endif %}
+  </div>
+  </div>
+
+  <div class="row container" id="skip">
+  <div class="col-md-6 d-flex pr_p">
+   {% if page.home %}
+        {{ page.home }}
+      {% endif %}
+  </div>
+  <div class="col-md-6 p-0 pr-4">
+   {% if page.home %}
+        {{ page.home2 }}
+      {% endif %}
+  </div>
+  </div>
+
+      {% if page.content %}
+				{{ page.content }}
+			{% endif %}
+{% if language.getId() == 'en' %}
+ <h3 class="text-center block-title">Important Link</h3>
+ {% endif %}
+ {% if language.getId() == 'hi' %}
+  <h3 class="text-center block-title">महत्वपूर्ण लिंक</h3>
+  {% endif %}
+      <div class="row container">
+
+  <div class="col-md-3 p-0" style="overflow-x: auto!important;
+  height: 450px!important;">
+
+   {% if page.importantlink %}
+        {{ page.importantlink }}
+      {% endif %}
+  </div>
+  <div class="col-md-3 p-0">
+   {% if page.facebook %}
+        {{ page.facebook }}
+      {% endif %}
+  </div>
+   <div class="col-md-3 p-0">
+   {% if page.twitter %}
+        {{ page.twitter }}
+      {% endif %}
+  </div>
+   <div class="col-md-3 pr-4">
+   {% if page.instagram %}
+        {{ page.instagram }}
+      {% endif %}
+  </div>
+  </div>
+			{% if page.content_home %}
+				<div class="homepage-content">
+					{{ page.content_home }}
+				</div><!--/.homepage-content -->
+			{% endif %}
+      {% include '@tara/template-parts/content_bottom.html.twig' %}
+    </main>
+    {% if front_sidebar %}
+      {% include '@tara/template-parts/left_sidebar.html.twig' %}
+      {% include '@tara/template-parts/right_sidebar.html.twig' %}
+      </div> {# /.main-container #}
+    {% endif %}
+  </div>
+  </div> <!--/.container -->
+<!-- /main-wrapper -->
+{% include '@tara/template-parts/footer.html.twig' %}

@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * Attached the custom library().
+ */
+function unee_header_page_attachments(array &$attachments) {
+	$attachments['#attached']['library'][] = 'unee_header/design';
+}
+
+/**
+ * Implements hook_theme().
+ */
+function unee_header_theme($existing, $type, $theme, $path) {
+  return array(
+    'unee_headers' => array(
+      'variables' => array('str_header' => NULL),
+    ),
+  );
+}
+
+
+
+function unee_header_link_alter_not_in_use(&$variables) {
+	
+	//echo 'TEEEEEEEEEEEEEEEEEE';die;
+	if ($variables['text'] == '@userimage') {
+		$user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+		$img = $user->get('user_picture')->getValue();
+
+		if (!empty($img)) {
+			$fid = $img[0]['target_id'];
+			$file = \Drupal\file\Entity\File::load($fid);
+			$url = \Drupal\image\Entity\ImageStyle::load('medium')->buildUrl($file->getFileUri());
+		} else{
+			$default_image = $user->get('user_picture')->getSetting('default_image');
+			$file = \Drupal::entityManager()->loadEntityByUuid('file', $default_image['uuid']);
+		}
+
+		$image_render_array = [
+			'#theme' => 'image_style',
+			'#style_name' => 'user_avatar',
+			'#uri' => $file->getFileUri(),
+		];
+		$renderer = \Drupal::service('renderer');
+		$renderer->addCacheableDependency($image_render_array, $file);
+		$rendered_image = $renderer->render($image_render_array);
+		$variables['text'] = $rendered_image;
+
+	}
+	if (isset($variables['route_name']) && strpos($variables['route_name'], 'admin') !== FALSE) {
+		//echo '=============';
+		$variables['text'] = t('@text (Warning!)', [
+		  '@text' => $variables['text'],
+		]);
+	}
+ // echo 'TEEEEEEEEEEEEEEEEEE------------';die;
+}
+

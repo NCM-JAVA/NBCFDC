@@ -1,0 +1,9 @@
+name: 'Usage Data'
+type: module
+description: 'Logs site usage data for analysis and visualization.'
+core_version_requirement: ^9.3 || ^10
+
+# Information added by Drupal.org packaging script on 2023-01-11
+version: '1.0.1'
+project: 'usage_data'
+datestamp: 1673469686

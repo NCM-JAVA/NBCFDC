@@ -1,0 +1,107 @@
+<!--<section id="last-section" class="section">
+</section>-->
+<!-- Start: Footer -->
+<footer id="footer">
+  <div class="footer">
+    <div class="container">
+      {% if page.footer_top %}
+        <div class="footer-top">
+          {{ page.footer_top }}
+        </div>
+      {% endif %}<!-- /footer-top -->
+      {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
+       <div class="footer-blocks">
+        {% if page.footer_first %}
+          <div class="footer-block">
+            {{ page.footer_first }}
+          </div>
+        {% endif %}<!--/footer-first -->
+        {% if page.footer_second %}
+          
+
+
+
+
+        {% endif %}<!--/footer-second -->
+        {% if page.footer_third %}
+          <div class="footer-block">
+            {{ page.footer_third }}
+            {{ page.footer_fourth }}
+          </div>
+        {% endif %}<!--/footer-third -->
+     
+
+        <!--/footer-fourth -->
+       </div> <!--/footer-blocks -->
+     {% endif %} {# end if for footer one, two, three, four blocks #}
+     {% if copyright_text or all_icons_show %}
+     
+
+      <!-- /footer-bottom-middle -->
+     {% endif %} <!-- end condition if copyright or social icons -->
+     {% if page.footer_bottom %}
+      
+
+
+       <!--/.footer-bottom -->
+     {% endif %} <!-- end condition for footer_bottom -->
+    </div><!-- /.container -->
+  </div> 
+<div class="text-center" style="background: #000; color: white; font-weight: 600; font-size: 14px; padding: 10px; margin-bottom: -1px;">
+    Website Content Managed by NBCFDC
+
+    &copy; {{ "now"|date("Y") }} All Rights Reserved <br>
+    
+</div>
+ 
+
+  <!--/.footer -->
+</footer>
+{% if scrolltotop_on %}
+<div class="scrolltop"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
+{% endif %}
+<!-- End: Footer -->
+{% if bootstrapicons %}
+  {{ attach_library('tara/bootstrap-icons') }}
+{% endif %}
+
+
+<!--feedback from input type validate -->
+
+<script>
+jQuery(document).ready(function(){
+    jQuery("#edit-field-name-0-value").addClass("alphaSpcDotDash");
+    jQuery("#edit-message-0-value").addClass("alphaSpcDotDash");
+jQuery('.alphaSpcDotDash').keypress(function(e) {
+  var keycode = e.which;
+  var fieldid = $(this).attr('id');
+  if (!((keycode == 45 || keycode == 46 || keycode == 8 || keycode == 32 || (keycode >= 65 && keycode <= 90) || (keycode >= 97 && keycode <= 122)))) {
+      jQuery('span.err-' + fieldid).remove();
+      jQuery('.error-' + fieldid).append('<span class="err-' + fieldid + '" style="color:red;">Only alphabets, dash(-), space and dot(.) allowed.</span>');
+      e.preventDefault();
+  } else {
+     jQuery('span.err-' + fieldid).remove();
+  }
+});
+
+jQuery('.alphaSpcDotDash').change(function(e) {
+    var keycode = e.which;
+    var fieldid = jQuery(this).attr('id');
+    var fielval = jQuery('#' + fieldid).val();
+    var regEx = /^[a-zA-Z.\-\s]+$/;
+    if (!fielval.match(regEx)) {
+        jQuery('span.err-' + fieldid).remove();
+       jQuery('.error-' + fieldid).append('<span class="err-' + fieldid + '" style="color:red;">Only alphabets, dash(-), space and dot(.) allowed.</span>');
+        e.preventDefault();
+    } else {
+       jQuery('span.err-' + fieldid).remove();
+    }
+    jQuery('#' + fieldid).val(fielval.replace(/[^a-zA-Z.\-\s]/gi, ''));
+    setTimeout(function() {
+        jQuery('span.err-' + fieldid).remove();
+    }, 5000);
+});
+});
+</script>
+
+<!--End Feedback-->

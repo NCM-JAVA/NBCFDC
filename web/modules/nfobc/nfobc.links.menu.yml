@@ -1,0 +1,5 @@
+nfobc.nfobc_setting:
+  title: 'NFOBC'
+  parent: nbcfdc.nbcfdc_setting
+  description: 'Update your Website From Here'
+  route_name: nfobc.nfobc_setting

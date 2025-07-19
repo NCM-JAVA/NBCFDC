@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * @file
+ * Install and update functions for the Work Horse Statistics module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function usage_data_schema() {
+  $schema['usage_data'] = [
+    'description' => 'Access usage data.',
+    'fields' => [
+      'id' => [
+        'description' => 'The identifier for the schema.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'event_type' => [
+        'description' => 'The event type, either view or download.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'entity_id' => [
+        'description' => 'The entity id for these statistics.',
+        'type' => 'varchar_ascii',
+        'not null' => TRUE,
+        'default' => '',
+        'length' => '255',
+      ],
+      'entity_type_id' => [
+        'description' => 'The entity type id.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'path' => [
+        'type' => 'text',
+        'not null' => FALSE,
+        'description' => 'Path of the event.',
+      ],
+      'count' => [
+        'description' => 'Simple count for each event.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+        'size' => 'small',
+      ],
+      'timestamp' => [
+        'description' => 'The most recent time the {entity} has been viewed.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'uid' => [
+        'description' => 'The user ID.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'user_name' => [
+        'description' => 'The username of the user.',
+        'type' => 'varchar_ascii',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'user_role' => [
+        'description' => 'The role of the user.',
+        'type' => 'varchar_ascii',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'entity_id' => ['entity_id'],
+      'entity_type_id' => ['entity_type_id'],
+      'uid' => ['uid'],
+    ],
+  ];
+
+  return $schema;
+}

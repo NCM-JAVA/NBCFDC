@@ -1,0 +1,9 @@
+name: Custom Visitor
+type: module
+description: Displaying the all information about visitors.
+dependencies:
+  - visitors
+  - block
+package: Custom
+version: 8.x
+core_version_requirement: ^10

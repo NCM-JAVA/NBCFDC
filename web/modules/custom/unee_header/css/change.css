@@ -1,0 +1,313 @@
+@charset "utf-8";
+body {
+	background:#000;
+	color:#fff;
+}
+body a, .footer-bottom-wrapper a,
+body .nav-wrapper ul li a{
+	color:#ffff00 !important;
+}
+ul.language-dropdown .links li a {
+    background-color: #000000;
+}
+.topbar {
+    background-color: #303030;
+}
+.navigation-bar {
+    background-color: #303030;
+}
+.navigation-bar ul.menu > li > a.is-active {
+    background-color: #000000;
+}
+.header-wrapper .views-exposed-form .js-form-item.form-item input {
+    background-color: #ffffff;
+    border: 0px;
+    height: 44px;
+}
+.header-wrapper .views-exposed-form .form-actions input {
+    background: #303030 url(../img/search.png) no-repeat 57% 45% !important;
+    right: 0px;
+    top: 1px;
+}
+.chairperson {
+    background-color: #000000;
+}    
+.notice-ticker {
+    background-color: #2c2c2c;
+    padding: 10px 20px;
+    width: 100%;
+    overflow: hidden;
+}
+.whatsnew-ticker-1 ul li a {
+    color: #ffff00 !important;
+}
+.latest-updates {
+    background-color: #303030;
+}
+.latest-updates .header h2{
+    color: #fff;
+}
+.latest-updates .quicktabs-wrapper .quicktabs-tabs li.active a {
+    background-color: #000000;
+    color: #fff;
+}
+.path-frontpage .quicktabs-wrapper .quicktabs-tabs a {
+    background-color: #4a4a4a;
+}        
+.inner-listing-content .quicktabs-main{
+    border-top: 1px solid #7c7c7c;
+}    
+.path-frontpage .latest-updates .quicktabs-wrapper .quicktabs-main li{
+    border-bottom: 1px solid #7c7c7c;
+}
+.more-link > a {
+    background-color: #4a4a4a;
+    color: #fff;
+}
+#card-slider{
+    background-color: transparent;
+    border: 0px;
+    margin: 0px;
+    padding: 30px 0;
+}
+.important-cards ul.slides li {
+    background: #303030!important;
+}
+.news-sec {
+    background: linear-gradient( 180deg, #000000, #fff);
+    padding: 60px 0;
+}
+.news-sec .content-box {
+    background-color: #000;
+}
+.news-sec .content-box h2.head {
+    color: #ffffff;
+}
+.news-sec .gallery-box {
+    background-color: #000;
+}
+.gallery-box .quicktabs-wrapper .quicktabs-tabs li:nth-child(1).active a {
+    background: url(../img/photo-icon.svg) #404144 no-repeat 8% 40%;
+    border: 2px solid #404144;
+}
+.news-sec .gallery-box .quicktabs-tabs li a {
+    background: transparent;
+    border: 2px solid #404144;
+}
+.footer-wrapper {
+    background-color: #2b2b2c;
+    padding: 40px 0;
+}
+
+
+.brand p {
+    font-size: 16px;
+    color: #fff51d!important;
+}
+.navigation-bar .menu.sf-main li ul {
+    background-color: #343434;
+}
+.navigation-bar .menu.sf-main li ul li a:hover {
+    background-color: #000000;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.content-info-cards {
+    background-color: #262626;
+    border: 1px solid rgb(255 255 255 / 94%);
+}
+.content-info-cards .card-header{
+   background-color: #262626;
+    color: #fff;
+    padding: 14px 14px;
+    border-bottom: 1px solid #ffffff91;
+}
+.content-info-cards ul li{
+    background-color: #000!important;
+}
+.minister-widget {
+    background: #3b3b3b !important;
+    border: 1px solid #fff;
+}
+.content-info-cards a {
+    border: 1px solid #ffff00;
+    color: #ffff00 !important;
+    padding: 3px 5px;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 5px;
+    margin-top: 6px;
+    display: inline-block;
+    margin-left: 9px;
+}
+
+.card.general-card .card-header {
+    background-color: #262626!important;
+    color: #fff;
+    padding: 14px 14px;
+    border-bottom: 1px solid #ffffff91;
+}
+.card.general-card {
+    border-radius: 14px!important;
+    overflow: hidden;
+    height: 100%;
+    background: #000;
+    border: 1px solid #f9f9f98a!important;
+}
+.card.general-card .card-footer a {
+    border: 1px solid #ffff00 !important;
+    color: #005b80;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 6px 19px;
+    display: inline-block;
+    border-radius: 7px;
+}
+.ministry-card .card-header {
+    background: #282828!important;
+}
+.ministry-card .card-body{
+    background: #000;
+}
+.ministry-card a {
+    border: 1px solid #ffff00 !important;
+    color: #005b80;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 6px 19px;
+    display: inline-block;
+    border-radius: 7px;
+}
+.links-box ul li {
+    width: 24%;
+    margin-bottom: 15px;
+    border: 1px solid #ffffff66;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 9px;
+}
+.footer-slider {
+    overflow: hidden;
+    width: 100%;
+    background: url(../img/footer-bg.png);
+    padding: 25px 0;
+    background: #000;
+}
+ 
+.inner-page-content .sidebar-first ul li a:hover, 
+.inner-page-content .sidebar-first ul li.is-active a {
+    background-color: #2b2b2c;
+    color: #fff;
+}
+table tr th {
+    background: #2b2b2c;
+    color: #fff;
+}
+form.views-exposed-form .form-actions input {
+    padding: 10px 46px;
+    background: #ffffff;
+    border: 0;
+    color: #000;
+    font-weight: 500;
+    border-radius: 8px;
+}
+.inner-page-content .content-area #block-pagetitle h1 {
+    border-left: 3px solid #ffffff;
+}
+.boards-wrapper-bread {
+    background: #303030;
+}
+.boards-wrapper-bread ol li {
+    color: #ffffff;
+    margin-right: 14px;
+    padding: 10px 0;
+    position: relative;
+    font-weight: 500;
+}
+
+.link-tabs .nav.nav-pills .nav-link.active {
+    background: #282828;
+    color: #fff;
+}
+.high-contrast.dark { color:#fff;}
+
+.banner-wrapper .flex-pauseplay a {background-color:#000;}
+.banner-wrapper .flexslider ul.slides li { color:#000;}
+ .banner-wrapper .flex-direction-nav a.flex-prev { background-color:#000; }
+ .banner-wrapper .flexslider ul.slides li a,
+.link-tabs .container.tab-pane ul li a,
+.card.general-card ul li a { background-color:#000; color: #ffff00 !important; }
+li.theme-changer .inner { background-color: #000000; color:fff;}
+li.theme-changer .inner a.current { background-color: #323232!important; }
+ 
+.banner-wrapper .flex-direction-nav a.flex-prev {
+    background: #000 url(../images/slider-left-arrow-y.png)!important;
+	background-size: 20px !important;
+	background-repeat: no-repeat!important;
+    background-position: 50%!important; 
+  }
+
+.banner-wrapper .flex-direction-nav a.flex-next {
+    background: #000 url(../images/slider-right-arrow-y.png)!important;
+    background-size: 20px!important;
+    background-repeat: no-repeat!important;
+    background-position: 50%!important;   
+}
+.general-card.gallery .flexslider .flex-direction-nav a.flex-prev {
+    background: #000 url(../images/slider-left-arrow-y.png)!important;
+    background-size: 20px!important;
+    background-repeat: no-repeat!important;
+    background-position: 50%!important;
+	border-radius: 6px; 
+}
+
+.general-card.gallery .flexslider .flex-direction-nav a.flex-next {
+    background: #000 url(../images/slider-right-arrow-y.png)!important;
+    background-size: 20px!important;
+    background-repeat: no-repeat!important;
+    background-position: 50%!important;
+}
+form.views-exposed-form { background-color: #222222; }
+.content-area .scroll-table1 table tr:nth-child(even) {
+    background-color: #1a1a1a;
+}
+form.webform-submission-feedback-form .form-actions input, 
+form.contact-message-form.contact-form .form-actions input { background: #3d3e3e; }
+li.theme-changer .inner a:nth-child(2) {color: #fff !important;}
+
+
+@media (max-width: 940px) {
+    .navigation-bar .sf-accordion-toggle a,
+    .navigation-bar .sf-accordion-toggle a:hover {
+        background: url(../images/high-c-menu.png);
+        background-size: 30px;
+        width: 35px;
+        height: 35px;
+        display: block;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        color: transparent;
+    }
+    .navigation-bar .sf-accordion-toggle a >span{display: none;}
+}
+ul.pager__items li a {    
+background: #3a3a3a; 
+}
+label.visually-hidden {
+    background-color: #fff;
+    color: #000;
+}
+.search-drop .form-submit {    
+	background-color: #303030; 
+}
+.topbar ul.accessibility-icons li,
+.language-switcher-language-url ul {
+border-left: 1px solid #000000; }
+
+a[title="Archive"] {
+background-color: #323232; }
+
+ 

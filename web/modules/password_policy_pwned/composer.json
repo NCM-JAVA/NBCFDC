@@ -1,0 +1,31 @@
+{
+    "name": "drupal/password_policy_pwned",
+    "description": "Sets up a password constraint to check if passwords are exposed through Pwned Passwords.",
+    "type": "drupal-module",
+    "keywords": ["Drupal", "Password Policy", "HIBP"],
+    "homepage": "http://drupal.org/project/prometheus_exporter",
+    "license": "GPL-2.0-or-later",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/password_policy_pwned",
+        "source": "https://git.drupalcode.org/project/password_policy_pwned"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "bin-dir": "bin/",
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "require": {
+        "drupal/password_policy": "^4.0"
+    },
+    "extra": {
+        "drush": {
+            "services": {
+                "drush.services.yml": "^9"
+            }
+        }
+    }
+}

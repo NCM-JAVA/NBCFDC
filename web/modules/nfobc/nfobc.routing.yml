@@ -1,0 +1,45 @@
+nfobc.nfobc_setting:
+  path: '/admin/nfobc'
+  defaults:
+    _controller: Drupal\nfobc\Controller\NfobcController::Nfobc_listing
+    _title: 'Add Edit and Delete the Nfobc'
+  requirements:
+    #_permission: 'access administration pages'
+    _role: 'administrator+rti_content_manager'
+    
+nfobc.nfobc_add:
+  path: '/admin/nfobc/add'
+  defaults:
+    _form: Drupal\nfobc\Form\addnfobc
+    _title: 'Add Nfobc'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'    
+    
+nfobc.nfobc_edit:
+  path: '/admin/nfobc/edit/{id}'
+  defaults:
+    _form: Drupal\nfobc\Form\editnfobc
+    _title: 'Edit Rti'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'
+    
+nfobc.nfobc_delete:
+  path: '/admin/nfobc/delete/{id}'
+  defaults:
+    _form: Drupal\nfobc\Form\deletenfobc
+    _title: 'Delete Nfobc'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'
+    
+nfobc_front:
+  path: '/nfobc/{ln}'
+  defaults:
+    _controller: Drupal\nfobc\Controller\NfobcController::front_nfobc
+    # _title: 'Tenders'
+  requirements:
+    _permission: 'access content'
+    
+    

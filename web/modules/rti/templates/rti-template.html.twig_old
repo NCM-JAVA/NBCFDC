@@ -1,0 +1,57 @@
+<style>body .panel-group .panel+.panel {
+     margin: none;
+}.panel-heading.rtitit{word-wrap: break-word;
+}</style>
+	<h3>{{title}}</h3>
+
+
+	   <div class="col-md-12 col-sm-12">
+            <div class="emergency-info lb">
+              <h5>{{titlemain}}</h5>
+			 
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"> 
+                <!--Panel Start-->
+				 {% for val in name %}
+                <div class="panel">
+                  <div class="panel-heading" role="tab" id="heading{{val.sr}}">
+                    <h6 style="margin-bottom:0px;"> <a class="rtitit" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{val.sr}}" aria-expanded="true" aria-controls="collapse{{val.sr}}">{{val.sr}}:-{{ val.rtiname | nl2br}}</a> </h6>
+                  </div>
+                  <div id="collapse{{val.sr}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{val.sr}}">
+                    <div class="panel-body">
+                      
+<div class="widget">
+             
+                <div class="categories inner">
+                  <ul>
+					  {% for  vl in val.tname %}
+					  {% set counter = ( counter | default(0) ) + 1 %}
+					  {% set cer = ( cer | default(0) ) %}
+                       {% if vl is empty %}Empty{% else %}
+                    <li><a style="font-size: 13px;" href="{{ url('<front>') }}sites/default/files/myimages/{{ val.pdf[cer] }}" target="_BLANK">{{vl | striptags}}</a></li>
+					{% endif %}
+						  {% set cer = cer  + 1 %}
+						{% endfor %}
+                      </ul>
+                </div>
+              </div>
+                    </div>
+                  </div>
+                </div>
+                <!--Panel End--> 
+				{% endfor %}
+              </div>
+			  
+            </div>
+          </div>
+	
+	
+	
+	
+<script>
+
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
+
+			

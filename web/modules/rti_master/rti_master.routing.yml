@@ -1,0 +1,38 @@
+nbcfdc.rti_master:
+  path: '/admin/masterrti'
+  defaults:
+    _controller: Drupal\rti_master\Controller\Rti_master::Rti_master_listing
+    _title: 'Add Edit and Delete the Master Rti Name'
+  requirements:
+    #_permission: 'access administration pages'
+   _role: 'administrator+rti_content_manager'
+    
+nbcfdc.rti_master_add:
+  path: '/admin/masterrti/add'
+  defaults:
+    _form: Drupal\rti_master\Form\addrti_master
+    _title: 'Add Rti'
+  requirements:
+    #_permission: 'access administration pages'
+    _role: 'administrator+rti_content_manager'     
+    
+nbcfdc.rtimaster_edit:
+  path: '/admin/master-rti/edit/{id}'
+  defaults:
+    _form: Drupal\rti_master\Form\editrti_master
+    _title: 'Edit Rti Master'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'
+    
+nbcfdc.rtimaster_delete:
+  path: '/admin/master-rti/delete/{id}'
+  defaults:
+    _form: Drupal\rti_master\Form\deleterti_master
+    _title: 'Are You Sure to want delete?'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'
+
+    
+    

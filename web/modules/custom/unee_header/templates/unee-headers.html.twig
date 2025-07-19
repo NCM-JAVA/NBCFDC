@@ -1,0 +1,59 @@
+{# unee_header/templates/unee-headers.html.twig #}
+<!-- <ul>
+    <li class="ico-skip cf skip"><a href="#skip" title="{{ 'Skip to main content'|t }}">{{ 'Skip to main content'|t }}</a></li>
+    <li><a href="{{ str_header }}" title="{{ 'Screen Reader Access'|t }}">{{ 'Screen Reader Access'|t }}</a></li>
+    <li class="font-increase">
+        <a class="fontdecrease test" title="Decrease font size" href="javascript:void(0);">A-</a>
+        <a class="fontreset" title="Reset font size" href="javascript:void(0);">A</a>
+        <a class="fontincrease" title="Increase font size" href="javascript:void(0);">A+</a>
+    </li>
+    <li class="theme-changer">
+		<a href="javascript:void(0);" class="high-contrast light" title="Normal Contrast" style="display: none;">A</a>
+		<a href="javascript:void(0);" class="high-contrast dark" title="High Contrast">A</a>
+	</li>               
+</ul> -->
+
+ <ul class="accessibility-icons float-end">
+ <li class="skip-content">
+                       <a href="#skip">{{ 'Skip to main content'|t }}</a>
+                    </li>
+                    <li class="sitemap-moca">
+                    {% if (language.getId() == '') %}
+									<a href="./sitemap" title="Sitemap">{{ 'Sitemap'|t }}</a>
+									{% else %}
+									<a href="./hi/sitemap" title="Sitemap">{{ 'Sitemap'|t }}</a>
+					{% endif %}
+                    </li>
+ <li class="theme-changer">
+		<span>Theme</span>
+		<div class="inner"><a href="javascript:void(0);" class="high-contrast light current" title="Normal Contrast" style="display: none;">A</a>
+		<a href="javascript:void(0);" class="high-contrast dark" title="High Contrast">A</a> </div>
+	</li> 
+    <li class="screen-reader">
+       <a href="./screen_reader" title="{{ 'Screen Reader Access'|t }}">{{ 'Screen Reader Access'|t }}</a>
+    </li>
+    <li class="font-size">
+       <a class="fontdecrease test" title="Decrease font size" href="javascript:void(0);">A-</a></li>
+        <li><a class="fontreset" title="Reset font size" href="javascript:void(0);">A</a></li>
+        <li><a class="fontincrease" title="Increase font size" href="javascript:void(0);">A+</a>
+     </li>
+	<li>
+      <a class="social-media-link-icon--facebook" href="https://www.facebook.com//nbcfdcgov" target="_blank" rel="nofollow" aria-label="Facebook" title="Facebook">
+        <span class="fab fa-facebook fa-fw"></span>
+      </a>
+
+          </li>
+      <li>
+      <a class="social-media-link-icon--instagram" href="https://www.instagram.com//nbcfdcgov" target="_blank" rel="nofollow" aria-label="Instagram" title="Instagram">
+        <span class="fab fa-instagram fa-fw"></span>
+      </a>
+
+          </li>
+      <li>
+      <a class="social-media-link-icon--twitter" href="https://www.twitter.com/nbcfdc" target="_blank" rel="nofollow" aria-label="Twitter" title="Twitter">
+        <span class="fab fa-x-twitter fa-fw"></span>
+      </a>
+
+          </li>
+	  
+  </ul>

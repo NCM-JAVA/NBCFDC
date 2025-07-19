@@ -1,0 +1,5 @@
+nfobc_child.nfobc_add:
+  route_name: nfobc_child.nfobc_add_sublink
+  title: 'Add Nfobc Sublink'
+  appears_on:
+    - nfobc_child.nfobc_child_setting

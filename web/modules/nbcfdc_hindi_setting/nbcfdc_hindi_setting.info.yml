@@ -1,0 +1,11 @@
+name: NBCFDC Hindi Web Setting
+type: module
+description: 'Manages the display of Whole NBCFDC Website'
+package: Custom
+# version: VERSION
+# core: 8.x
+
+# Information added by Drupal.org packaging script on 2019-03-13
+core_version_requirement: ^10
+project: 'drupal'
+datestamp: 1552511636

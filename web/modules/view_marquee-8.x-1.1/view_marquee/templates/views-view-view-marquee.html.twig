@@ -1,0 +1,62 @@
+{#
+/**
+ * Default theme implementation for Views to output a TARDIS archive.
+ *
+ * Available variables:
+ * - options: View plugin style options:
+ *   - row_class: Row classes.
+ *   - direction: Marquee direction (left, right, up, down).
+ *   - behavior: Marquee direction behavior
+ *   - speed: Marquee speed
+ *   - delay: Marquee delay
+ * @see template_preprocess_views_view_view_marquee()
+ *
+ */
+#}
+
+{%
+  set classes = [
+    'views-view-marquee',
+    'marquee-direction-'~options.direction
+  ]
+%}
+
+{{ attach_library('view_marquee/marquee-style') }}
+
+<div{{ attributes.addClass(classes) }}>
+  <div class="custom-marquee-wrapper">
+    <!-- Marquee Content (Main) -->
+    <div class="marquee-content">
+      {% for row in rows %}
+        <div class="marquee-item">
+          {{ row }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function($) {
+    $(document).ready(function() {
+      var direction = '{{ options.direction }}';  // Direction: left, right, up, down
+      var speed = parseFloat('{{ options.speed }}');  // Marquee speed in seconds
+      var delay = parseFloat('{{ options.delay }}');  // Marquee delay before loop starts
+
+      // Apply direction-specific animation durations directly in CSS
+      if (direction === 'left') {
+        // Set left direction to a slower speed (e.g., 20s for better readability)
+        $('.custom-marquee-wrapper').css({
+          'animation-duration': '20s',  // Adjusted speed for left direction (slower for readability)
+          'animation-delay': '0s'  // Set delay to 0s to ensure content starts immediately
+        });
+      } else if (direction === 'right') {
+        // Set right direction to normal speed
+        $('.custom-marquee-wrapper').css({
+          'animation-duration': speed + 's',  // Normal right direction animation speed
+          'animation-delay': delay + 's'
+        });
+      }
+    });
+  })(jQuery);
+</script>

@@ -1,0 +1,36 @@
+rti_child.rti_child_setting:
+  path: '/admin/rti_child'
+  defaults:
+    _controller: Drupal\rti_child\Controller\Rti_childController::Rti_childlisting
+    _title: 'Add Edit and Delete the Rti Sublink'
+  requirements:
+    #_permission: 'access administration pages'
+    _role: 'administrator+rti_content_manager'
+rti_child.rti_add_sublink:
+  path: '/admin/rti_child/add_rti_sublink'
+  defaults:
+    _form: Drupal\rti_child\Form\addrti_sublink
+    _title: 'Add Rti Sublinks'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'
+rti_child.rti_child_edit:
+  path: '/admin/rti_child/edit/{id}'
+  defaults:
+    _form: Drupal\rti_child\Form\editrti_child
+    _title: 'Edit Rti Sublinks'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'
+rti_child.rti_child_delete:
+  path: '/admin/rti_child/delete/{id}'
+  defaults:
+    _form: Drupal\rti_child\Form\deleterti_child
+    _title: 'Delete Rti'
+  requirements:
+    #_permission: 'access administration pages'
+     _role: 'administrator+rti_content_manager'     
+    
+
+    
+    

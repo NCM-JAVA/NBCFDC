@@ -1,0 +1,668 @@
+{#
+/**
+ * @file
+ * Theme override for the basic structure of a single Drupal page.
+ *
+ * Variables:
+ * - logged_in: A flag indicating if user is logged in.
+ * - root_path: The root path of the current page (e.g., node, admin, user).
+ * - node_type: The content type for the current node, if the page is a node.
+ * - head_title: List of text elements that make up the head_title variable.
+ *   May contain one or more of the following:
+ *   - title: The title of the page.
+ *   - name: The name of the site.
+ *   - slogan: The slogan of the site.
+ * - page_top: Initial rendered markup. This should be printed before 'page'.
+ * - page: The rendered page markup.
+ * - page_bottom: Closing rendered markup. This variable should be printed after
+ *   'page'.
+ * - db_offline: A flag indicating if the database is offline.
+ * - placeholder_token: The token for generating head, css, js and js-bottom
+ *   placeholders.
+ *
+ * @see template_preprocess_html()
+ */
+#}
+{%
+  set body_classes = [
+    logged_in ? 'user-logged-in' : 'user-guest',
+    not root_path ? 'frontpage' : 'inner-page path-' ~ root_path|clean_class,
+    node_type ? 'page-type-' ~ node_type|clean_class,
+    not page.sidebar_first and not page.sidebar_second ? 'no-sidebar',
+    page.sidebar_first and not page.sidebar_second ? 'one-sidebar sidebar-left',
+    page.sidebar_second and not page.sidebar_first ? 'one-sidebar sidebar-right',
+    page.sidebar_first and page.sidebar_second ? 'two-sidebar'
+  ]
+%}
+<!DOCTYPE html>
+<html{{ html_attributes }}>
+  <head>
+    <head-placeholder token="{{ placeholder_token|raw }}">
+    <title>{{ head_title|safe_join(' | ') }}</title>
+
+    {# Meta Tags #}
+    {% set current_path = path('<current>') %}
+    {% set trimmed_path = current_path|split('/')|slice(-1)|first %}
+    {% set path_parts = current_path|split('/') %}
+
+    {# Determine language based on URL path #}
+    {% if path_parts[3] == 'hi' %}
+        {% set language = 'hi' %}
+    {% else %}
+        {% set language = 'en' %}
+    {% endif %}
+
+    {% if language == 'hi' %}
+        {# Hindi Meta Tags #}
+		
+        {% if trimmed_path == 'about' %}
+            <meta name="description" content="हमारे बारे में, राष्ट्रीय पिछड़ा वर्ग वित्त एवं विकास निगम (एनबीसीएफडीसी) एक सरकारी कंपनी है।">
+            <meta name="keywords" content="हमारे बारे में">
+			
+		{% elseif trimmed_path == 'corporate-profile' %}
+            <meta name="description" content="कॉर्पोरेट प्रोफ़ाइल, निगम का उद्देश्य पिछड़े वर्गों के लाभ के लिए आर्थिक और विकासात्मक गतिविधियों को बढ़ावा देना और कौशल विकास और स्वरोजगार उद्यमों में इन वर्गों के गरीब वर्ग की सहायता करना है।">
+            <meta name="keywords" content="कॉर्पोरेट प्रोफ़ाइल">
+					
+        {% elseif trimmed_path == 'vision' %}
+            <meta name="description" content="विजन और मिशन, निगम की स्थापना पिछड़े वर्गों के लक्षित समूह की आर्थिक स्थिति के उत्थान में अग्रणी भूमिका निभाने के लिए की गई है।">
+            <meta name="keywords" content="विजन और मिशन">
+					
+        {% elseif trimmed_path == 'objective' %}
+            <meta name="description" content="उद्देश्य, ऐसी आय और / या आर्थिक मानदंडों के अधीन सहायता के लिए, जो समय-समय पर सरकार द्वारा पिछड़े वर्गों से संबंधित व्यक्तियों या समूहों को ऋण और आर्थिक रूप से व्यवहार्य योजनाओं और परियोजनाओं के लिए ऋण और अग्रिम के रूप में निर्धारित किया जा सकता है। पिछड़े वर्गों के लाभ के लिए स्वरोजगार और अन्य उपक्रमों को बढ़ावा देना।">
+            <meta name="keywords" content="उद्देश्य">
+					
+        {% elseif trimmed_path == 'bod' %}
+            <meta name="description" content="निदेशक मंडल, हमारी निदेशक मंडल का अन्वेषण करें।">
+            <meta name="keywords" content="निदेशक मंडल">
+					
+        {% elseif trimmed_path == 'bod-sub-committee' %}
+            <meta name="description" content="बीओडी सब कमेटी, हमारी बीओडी सब कमेटी का अन्वेषण करें।">
+            <meta name="keywords" content="बीओडी सब कमेटी">
+					
+        {% elseif trimmed_path == 'key_executives' %}
+                       <meta name="description" content="मुख्य कार्यकारी, हमारी मुख्य कार्यकारी का अन्वेषण करें।">
+            <meta name="keywords" content="मुख्य कार्यकारी">
+					
+        {% elseif trimmed_path == 'organization-chart' %}
+            <meta name="description" content="संगठन चार्ट, हमारी संगठन चार्ट का अन्वेषण करें।">
+            <meta name="keywords" content="संगठन चार्ट">
+					
+        {% elseif trimmed_path == 'individual-loan-scheme' %}
+            <meta name="description" content="व्यक्तिगत ऋण योजना, हमारी व्यक्तिगत ऋण योजना का अन्वेषण करें।">
+            <meta name="keywords" content="व्यक्तिगत ऋण योजना">
+					
+        {% elseif trimmed_path == 'group-loan-scheme' %}
+            <meta name="description" content="समूह ऋण योजना, हमारी समूह ऋण योजना का अन्वेषण करें।">
+            <meta name="keywords" content="समूह ऋण योजना">		
+        {% elseif trimmed_path == 'loan-flyer' %}
+            <meta name="description" content="ऋण स्कीम फ्लायर, राज्य सरकार/जिला प्रशासन के सक्षम प्राधिकारी द्वारा जारी आय प्रमाण-पत्र या अंत्योदय अन्न योजना (ए.ए.वाई.) अथवा गरीबी रेखा से नीचे (बी.पी.एल.) कार्ड धारक। राष्ट्रीय पिछड़ा वर्ग वित्त एवं विकास निगम (एन.बी.सी.एफ.डी.सी.), सामाजिक न्याय और अधिकारिता मंत्रालय के तत्वावधान में भारत सरकार का एक उपक्रम है जो चैनल पार्टनर (राज्य चैनलाइजिंग एजेंसियों/बैंकों) के माध्यम से पिछड़े वर्ग के उन सदस्यों को रियायती वित्तीय सहायता प्रदान करता है जिनकी वार्षिक पारिवारिक आय रू. 3.00 लाख तक है।">
+            <meta name="keywords" content="ऋण स्कीम फ्लायर">
+					
+        {% elseif trimmed_path == 'howapply' %}
+            <meta name="description" content="कैसे और कहां आवेदन करें।">
+            <meta name="keywords" content="कैसे और कहां आवेदन करे">
+					
+        {% elseif trimmed_path == 'loans-pattern-of-finance' %}
+            <meta name="description" content="वित्त का पैटर्न, हमारी वित्त का पैटर्न का अन्वेषण करें।">
+            <meta name="keywords" content="वित्त का पैटर्न">
+					
+        {% elseif trimmed_path == 'sca' %}
+            <meta name="description" content="एससीए, हमारी एससीए का अन्वेषण करें।">
+            <meta name="keywords" content="एससीए">
+					
+        {% elseif trimmed_path == 'Evaluation-Overview' %}
+            <meta name="description" content="अवलोकन, निगम समय-समय पर जमीनी स्तर पर प्रभाव का आकलन करने के लिए अपनी योजनाओं के मूल्यांकन पर उचित जोर देता है। अध्ययन स्वतंत्र एजेंसियों द्वारा आयोजित किए गए थे। ऐसे अध्ययनों की खोज और सिफारिशों के आधार पर, निगम संभावित लाभार्थियों की बेहतरी के लिए अपनी नीतियों में सुधार करता है।">
+            <meta name="keywords" content="अवलोकन">
+					
+        {% elseif trimmed_path == 'evaluations' %}
+            <meta name="description" content="मूल्यांकन">
+            <meta name="keywords" content="मूल्यांकन">
+					
+        {% elseif trimmed_path == 'success-stories-and-photographs' %}
+            <meta name="description" content="कहानियां और तस्वीरें, कहानियां और तस्वीरें का अन्वेषण करें।">
+            <meta name="keywords" content="कहानियां और तस्वीरें">
+			
+				
+        {% elseif trimmed_path == 'eligibility' %}
+            <meta name="description" content="पात्रता, कौशल विकास प्रशिक्षण के लिए पात्रता।">
+            <meta name="keywords" content="पात्रता">		
+       {% elseif trimmed_path == 'skills-schemes-flyer' %}
+            <meta name="description" content="पी.एम. दक्ष फ्लायर, अनुसूचित जाति, अन्य पिछड़ा वर्ग व सफाई कार्यकर्ताओं, ट्रांसजेंडर और ऐसी अन्य श्रेणियों के सीमांत वर्गों के कौशल विकास के लिए कार्य योजना।">
+            <meta name="keywords" content="पी.एम. दक्ष फ्लायर">
+			
+
+
+
+		
+        {% elseif trimmed_path == 'skilling-photo-gallery' %}
+            <meta name="description" content="फोटो गैलरी">
+            <meta name="keywords" content="फोटो गैलरी">
+    			
+			
+        {% elseif trimmed_path == 'marketing_linkages' %}
+            <meta name="description" content="विपणन लिंक, पिछड़े वर्गों की एक बड़ी संख्या कारीगर और हस्तशिल्प व्यक्ति हैं। लक्षित वर्ग पारंपरिक कार्यों से जुड़ा है। बाजार की बदलती मांग को ध्यान में रखते हुए, निगम इस वर्ग के उत्पादों में नई तकनीक और गुणवत्ता का विस्तार करने के लिए लगातार विभिन्न तरीकों से मदद कर रहा है ताकि उत्पाद प्रतिस्पर्धा की कसौटी पर खरे उतर सकें और लाभार्थी लाभ कमा सकें।">
+            <meta name="keywords" content="विपणन लिंक">
+			
+				
+        {% elseif trimmed_path == 'reports' %}
+            <meta name="description" content="वार्षिक रिपोर्ट्स, हमारी वार्षिक रिपोर्ट्स का अन्वेषण करें।">
+            <meta name="keywords" content="वार्षिक रिपोर्ट्स">	
+			
+			
+        {% elseif trimmed_path == 'mou' %}
+            <meta name="description" content="एमओयू दस्तावेज़, हमारी एमओयू दस्तावेज़ का अन्वेषण करें।">
+            <meta name="keywords" content="एमओयू दस्तावेज़">
+			
+      {% elseif trimmed_path == 'mou-rating' %}
+            <meta name="description" content="एम ओ यू रेटिंग, हमारी एम ओ यू रेटिंग का अन्वेषण करें।">
+            <meta name="keywords" content="एम ओ यू रेटिंग">			
+		  
+		
+        {% elseif trimmed_path == 'nbcfdcdashboard' %}
+            <meta name="description" content="एनबीसीएफडीसी डैशबोर्ड">
+            <meta name="keywords" content="एनबीसीएफडीसी डैशबोर्ड">
+
+ 		
+        {% elseif trimmed_path == 'contact-us' %}
+            <meta name="description" content="हमसे संपर्क करें, राष्ट्रीय पिछड़ा वर्ग वित्त और विकास निगम 5 वीं मंजिल, NCUI बिल्डिंग, 3, सिरी इंस्टीट्यूशनल एरिया, अगस्त क्रांति मार्ग, नई दिल्ली -110016, दूरभाष। : + 91-11-45854400, 26511027/26511028">
+            <meta name="keywords" content="हमसे संपर्क करे">
+			
+		 {% elseif trimmed_path == 'achivement' %}
+            <meta name="description" content="उपलब्धि">
+            <meta name="keywords" content="उपलब्धि">	
+			
+		{% elseif trimmed_path == 'artisan-product' %}
+            <meta name="description" content="कारीगर उत्पाद, हमारी कारीगर उत्पाद का अन्वेषण करें।">
+            <meta name="keywords" content="कारीगर उत्पाद">
+			
+			        {% elseif trimmed_path == 'aspirational-district' %}
+            <meta name="description" content="आकांक्षी-जिला, हमारी आकांक्षी-जिला का अन्वेषण करें।">
+            <meta name="keywords" content="आकांक्षी-जिला">
+		
+			
+			        {% elseif trimmed_path == 'backlog-vacanies' %}
+            <meta name="description" content="बैकलॉग-रिक्तियाँ, हमारी बैकलॉग-रिक्तियाँ का अन्वेषण करें।">
+            <meta name="keywords" content="बैकलॉग-रिक्तियाँ">
+			
+			        {% elseif trimmed_path == 'bank' %}
+            <meta name="description" content="बैंक">
+            <meta name="keywords" content="बैंक, हमारी बैंक का अन्वेषण करें।">
+			
+			        {% elseif trimmed_path == 'code-business' %}
+            <meta name="description" content="बोर्ड के सदस्यों और वरिष्ठ प्रबंधन के लिए व्यावसायिक आचरण और नैतिकता संहिता।">
+            <meta name="keywords" content="बोर्ड के सदस्यों और वरिष्ठ प्रबंधन के लिए व्यावसायिक आचरण और नैतिकता संहिता">
+			
+			        {% elseif trimmed_path == 'employee-corner' %}
+            <meta name="description" content="कर्मचारी कॉर्नर, हमारी कर्मचारी कॉर्नर का अन्वेषण करें">
+            <meta name="keywords" content="कर्मचारी कॉर्नर, ">
+			
+			        {% elseif trimmed_path == 'field-visi' %}
+            <meta name="description" content="क्षेत्र की यात्रा">
+            <meta name="keywords" content="क्षेत्र की यात्रा">
+			
+			       {% elseif trimmed_path == 'moa-aoa' %}
+            <meta name="description" content="एमओए और एओए">
+            <meta name="keywords" content="एमओए और एओए">
+			
+			       {% elseif trimmed_path == 'photo-gallery' %}
+            <meta name="description" content="फोटो गैलरी">
+            <meta name="keywords" content="फोटो गैलरी">
+			
+			    {% elseif trimmed_path == 'awareness-camps' %}
+            <meta name="description" content="जागरूकता-शिविर">
+            <meta name="keywords" content="जागरूकता-शिविर">
+			
+			       {% elseif trimmed_path == 'purchase_plan' %}
+            <meta name="description" content="खरीद योजना 2023-24">
+            <meta name="keywords" content="खरीद योजना 2023-24">
+{% elseif trimmed_path == 'skill-training' %}
+            <meta name="description" content="कौशल प्रशिक्षण">
+            <meta name="keywords" content="कौशल प्रशिक्षण">
+			
+			       {% elseif trimmed_path == 'VISVAS_FAQ' %}
+            <meta name="description" content="विस्वास अक्सर पूछे जाने वाले प्रश्न">
+            <meta name="keywords" content="विस्वास अक्सर पूछे जाने वाले प्रश्न">
+			
+			       {% elseif trimmed_path == 'rti' %}
+            <meta name="description" content="आरटीआई, आरटीआई अधिनियम 2005, आरटीआई अधिनियम की धारा 4 के तहत खुलासाकर्ता">
+            <meta name="keywords" content="आरटीआई">
+			
+			       {% elseif trimmed_path == 'success_stories' %}
+            <meta name="description" content="सफलता की कहानिया, अपने अस्तित्व के इकतीस वर्षों में, निगम हमारे देश के प्रत्येक राज्य/केंद्र शासित प्रदेश में फैले पिछड़े समुदायों से संबंधित लगभग 31 लाख लाभार्थियों तक पहुंच चुका है। किसी भी संभावित हस्तक्षेप के माध्यम से पिछड़े समुदायों के सामाजिक-आर्थिक सशक्तीकरण के अपने आदेश के तहत, निगम द्वारा संचालित रियायती ऋण योजनाएं काफी प्रभावशाली रही हैं।">
+            <meta name="keywords" content="सफलता की कहानिया">
+			
+			       {% elseif trimmed_path == 'career' %}
+            <meta name="description" content="करियर और रिक्तियां, हमारी करियर और रिक्तियां का अन्वेषण करें।">
+            <meta name="keywords" content="करियर और रिक्तियां">
+			
+			       {% elseif trimmed_path == 'notice' %}
+            <meta name="description" content="सूचना, हमारी करियर और रिक्तियां का अन्वेषण करें।">
+            <meta name="keywords" content="सूचना">
+			
+			       {% elseif trimmed_path == 'nfobc' %}
+            <meta name="description" content="एनएफओबीसी, सामाजिक न्याय और अधिकारिता मंत्रालय, सरकार द्वारा वित्त पोषित अन्य पिछड़ा वर्ग (एनएफओबीसी) के लिए राष्ट्रीय फैलोशिप की योजना के कार्यान्वयन के लिए एनबीसीएफडीसी को नोडल एजेंसी के रूप में नामित किया गया है|">
+            <meta name="keywords" content="एनएफओबीसी">
+			
+			       {% elseif trimmed_path == 'faq' %}
+            <meta name="description" content="सामान्य प्रश्न">
+            <meta name="keywords" content="सामान्य प्रश्न, हमारी करियर और रिक्तियां का अन्वेषण करें।">
+			
+			  
+			
+			       {% elseif trimmed_path == 'csr-activity' %}
+            <meta name="description" content="सीएसआर">
+            <meta name="keywords" content="सीएसआर">
+			
+			       {% elseif trimmed_path == 'अन्य योजना' %}
+            <meta name="description" content="अन्य योजना, प्रदर्शन से जुड़ी सहायता अनुदान योजना (पीएलजीआईए), क्लस्टरों का प्रौद्योगिकी उन्नयन, जागरूकता शिविर">
+            <meta name="keywords" content="अन्य योजना">
+			
+			       {% elseif trimmed_path == 'rajbhasha' %}
+            <meta name="description" content="राजभाषा, भारत के संविधान के भाग-17, अनुच्छेद 343 से 351 तक राजभाषा संबंधी विभिन्न उपबंध किए गए हैं।  इसके साथ ही साथ राजभाषा अधिनियम, 1963, राजभाषा संकल्प, 1968 राजभाषा नियम, 1976 आदि विभिन्न प्रावधान किए गए हैं।">
+            <meta name="keywords" content="राजभाषा">	
+
+{% elseif trimmed_path == 'publications' %}
+            <meta name="description" content="प्रकाशन, सफलता की कहानियां, राजभाषा सुभाषिणी।">
+            <meta name="keywords" content="प्रकाशन">
+			
+			       {% elseif trimmed_path == 'standard_formats' %}
+            <meta name="description" content="मानक प्रारूप, हमारी मानक प्रारूप का अन्वेषण करें।">
+            <meta name="keywords" content="मानक प्रारूप">
+			
+			       {% elseif trimmed_path == 'sdtp-institute' %}
+            <meta name="description" content="एसडीटीपी-संस्थान, हमारी मानक प्रारूप का अन्वेषण करें।">
+            <meta name="keywords" content="एसडीटीपी-संस्थान">
+			
+			       {% elseif trimmed_path == 'video-gallery' %}
+            <meta name="description" content="वीडियो गैलरी,हमारी वीडियो गैलरी का अन्वेषण करें।">
+            <meta name="keywords" content="वीडियो गैलरी">
+			
+			   {% elseif trimmed_path == 'help' %}
+            <meta name="description" content="मदद, पोर्टल की जानकारी विभिन्न स्क्रीन रीडर्स, जैसे कि JAWS, NVDA, SAFA, सुपरनोवा और विंडो-आइज़ के साथ उपलब्ध है।">
+            <meta name="keywords" content="Help">
+			
+			   {% elseif trimmed_path == 'certifications' %}
+            <meta name="description" content="प्रमाणपत्र">
+            <meta name="keywords" content="प्रमाणपत्र">
+			
+			   {% elseif trimmed_path == 'terms_conditions' %}
+            <meta name="description" content="नियम एवं शर्तें, यह वेबसाइट एनबीसीएफडीसी द्वारा डिजाइन, विकसित और रखरखाव की गई है। हालाँकि इस वेबसाइट पर सामग्री की सटीकता और प्रासंगिकता सुनिश्चित करने के लिए सभी प्रयास किए गए हैं, लेकिन इसे कानून के बयान के रूप में नहीं समझा जाना चाहिए या किसी कानूनी उद्देश्यों के लिए उपयोग नहीं किया जाना चाहिए। किसी भी अस्पष्टता या संदेह के मामले में, उपयोगकर्ताओं को सलाह दी जाती है कि वे विभाग(विभागों) और/या अन्य स्रोतों से सत्यापन/जांच करें, और उचित पेशेवर सलाह प्राप्त करें।">
+            <meta name="keywords" content="नियम एवं शर्तें">
+			
+			   {% elseif trimmed_path == 'web_information' %}
+            <meta name="description" content="वेब सूचना प्रबंधक">
+            <meta name="keywords" content="वेब सूचना प्रबंधक">
+			
+			       {% elseif trimmed_path == 'website-policies' %}
+            <meta name="description" content="वेबसाइट नीतियाँ, एनबीसीएफडीसी वेबसाइट में किसी भी कॉपीराइट संरक्षित तृतीय पक्ष सामग्री का उपयोग नहीं किया गया है| इस पोर्टल पर प्रदर्शित सामग्री को विशिष्ट अनुमति की आवश्यकता के बिना किसी भी प्रारूप या मीडिया में नि:शुल्क पुन: प्रस्तुत किया जा सकता है। यह सामग्री के सटीक रूप से पुन: प्रस्तुत किए जाने और न किए जाने के अधीन है।">
+            <meta name="keywords" content="वेबसाइट नीतियाँ">			
+			
+        {% elseif trimmed_path == 'tenders-vacancies' %}
+            <meta name="description" content="निविदा">
+            <meta name="keywords" content="निविदा">	
+		
+        {% elseif trimmed_path == 'homepage' or current_path == path('<front>') %}
+            <meta name="description" content="एन.बी.सी.एफ.डी.सी, राष्ट्रीय पिछड़ा वर्ग वित्त एवं विकास निगम (एन.बी.सी.एफ.डी.सी.) सामाजिक न्याय और अधिकारिता मंत्रालय के तत्वावधान में भारत सरकार का उपक्रम है। एन.बी.सी.एफ.डी.सी. को कम्पनी अधिनियम, 1956 की धारा 25 के अन्तर्गत (अब कम्पनी अधिनियम, 2013 की धारा-8) एक लाभ मुक्त कम्पनी के रूप में दिनाँक 13 जनवरी, 1992 को निगमित किया गया। इसका मुख्य उद्देश्य अन्य पिछड़े वर्गो के लाभ के लिए आर्थिक एवं विकासात्मक कार्यकलापों को प्रोन्नत करना तथा इन वर्गों के निर्धनतम व्यक्तियों को कौशल विकास एवं स्व-रोजगार के लिए सहायता उपलब्ध कराना है।">
+            <meta name="keywords" content="एन.बी.सी.एफ.डी.सी">
+        {% else %}
+            <meta name="description" content="एन.बी.सी.एफ.डी.सी">
+            <meta name="keywords" content="एन.बी.सी.एफ.डी.सी, राष्ट्रीय पिछड़ा वर्ग वित्त एवं विकास निगम (एन.बी.सी.एफ.डी.सी.) सामाजिक न्याय और अधिकारिता मंत्रालय के तत्वावधान में भारत सरकार का उपक्रम है। एन.बी.सी.एफ.डी.सी. को कम्पनी अधिनियम, 1956 की धारा 25 के अन्तर्गत (अब कम्पनी अधिनियम, 2013 की धारा-8) एक लाभ मुक्त कम्पनी के रूप में दिनाँक 13 जनवरी, 1992 को निगमित किया गया। इसका मुख्य उद्देश्य अन्य पिछड़े वर्गो के लाभ के लिए आर्थिक एवं विकासात्मक कार्यकलापों को प्रोन्नत करना तथा इन वर्गों के निर्धनतम व्यक्तियों को कौशल विकास एवं स्व-रोजगार के लिए सहायता उपलब्ध कराना है।">
+        {% endif %}
+    {% else %}
+        {# English Meta Tags #}
+        {% if trimmed_path == 'about' %}
+            <meta name="description" content="About Us, National Backward Classes Finance and Development Corporation (NBCFDC)  is a Govt. of India Undertaking under the aegis of Ministry of Social Justice and Empowermen.">
+            <meta name="keywords" content="About Us">
+			
+		  {% elseif trimmed_path == 'corporate-profile' %}
+            <meta name="description" content="Corporate Profile, The objective of the Corporation is to promote economic and developmental activities for the benefit of Backward Classes and to assist the poorer section of these classes in skill development and self-employment ventures.">
+            <meta name="keywords" content="Corporate Profile">	
+			
+			
+		  {% elseif trimmed_path == 'vision' %}
+            <meta name="description" content="Vision and Mission, The Corporation has been established to play a leading role in upliftment of the economic condition of the target group of backward classes.">
+            <meta name="keywords" content="Vision and Mission">	
+			
+		   {% elseif trimmed_path == 'objective' %}
+            <meta name="description" content="Objective, To provide for gainful employment and skill development to the target group and to assist in the upgradation of technical and entrepreneurial skills of Backward Classes for proper and efficient management of production units.">
+            <meta name="keywords" content="Objective">
+			
+		    {% elseif trimmed_path == 'bod' %}
+            <meta name="description" content="Board of Directors, Explore our Board of Directors.">
+            <meta name="keywords" content="Board of Directors">
+			
+			  {% elseif trimmed_path == 'bod-sub-committee' %}
+            <meta name="description" content="BoD Sub Committee, Explore our BoD Sub Committee.">
+            <meta name="keywords" content="BoD Sub Committee">
+			
+			  {% elseif trimmed_path == 'key_executives' %}
+            <meta name="description" content="Key Executives,Explore our Key Executives.">
+            <meta name="keywords" content="Key Executives">
+			
+			  {% elseif trimmed_path == 'organization-chart' %}
+            <meta name="description" content="Organization-Chart, Explore our Organization-Chart.">
+            <meta name="keywords" content="Organization-Chart">
+			
+			  {% elseif trimmed_path == 'individual-loan-scheme' %}
+            <meta name="description" content="Individual Loan Scheme, The loans under Corporation's schemes can be provided for income generating activities, following the due processes of the concerned Channel Partner. The activities could be anything which have potential to provide sustainable income generation for the beneficiary.">
+            <meta name="keywords" content="Individual Loan Scheme">
+			
+			  {% elseif trimmed_path == 'group-loan-scheme' %}
+            <meta name="description" content="Group Loan Scheme, Under this scheme, loan assistance is available to Self Help Groups (SHGs) to provide credit facilities for the target group through nominated Channel Partners (State Channelising Agencies/Banks).">
+            <meta name="keywords" content="Group Loan Scheme">
+			
+			  {% elseif trimmed_path == 'loan-flyer' %}
+            <meta name="description" content="Loan Flyer, National Backward Classes Finance and Development Corporation (NBCFDC), a Government of India Undertaking has been established under the aegis of Ministry of Social Justice and Empowerment which provides concessional financial assistance to the members of Backward Classes whose annual family income is upto Rs.3.00 Lakh, through Channel Partners (State Channelising Agencies/Banks).">
+            <meta name="keywords" content="Loan Flyer">
+				  
+				  {% elseif trimmed_path == 'howapply' %}
+            <meta name="description" content="How and Where to Apply">
+            <meta name="keywords" content="How and Where to Apply">
+			
+			{% elseif trimmed_path == 'loans-pattern-of-finance' %}
+            <meta name="description" content="Pattern of Finance, Individual Loan Scheme, Group Loan Scheme.">
+            <meta name="keywords" content="Pattern of Finance">
+			
+				  {% elseif trimmed_path == 'sca' %}
+            <meta name="description" content="SCAs">
+            <meta name="keywords" content="SCAs">
+			{% elseif trimmed_path == 'Evaluation-Overview' %}
+            <meta name="description" content="Evaluation-Overview, The Corporation gives due emphasis on evaluation of its schemes to have an impact assessment at the grass root level from time to time. The studies were conducted by independent agencies. Based on the finding and recommendations of such studies, the Corporation carries out improvement in its policies for betterment of prospective beneficiaries.">
+            <meta name="keywords" content="Evaluation-Overview">
+			
+			  {% elseif trimmed_path == 'evaluations' %}
+            <meta name="description" content="Evaluations, Explore our Evaluations">
+            <meta name="keywords" content="Evaluations">
+			
+			  {% elseif trimmed_path == 'success-stories-and-photographs' %}
+            <meta name="description" content="Stories and Photographs, Explore our Stories and Photographs">
+            <meta name="keywords" content="Stories and Photographs">
+			
+			  {% elseif trimmed_path == 'eligibility' %}
+            <meta name="description" content="Eligibility, Caste categorization under OBC as per either Centre list at website www.ncbc.gov.in or the designated State Govt. list. Caste certificate issued by relevant State Government is required.">
+            <meta name="keywords" content="Eligibility">
+			
+			  {% elseif trimmed_path == 'skills-schemes-flyer' %}
+            <meta name="description" content="PM DAKSH Yojana, Pradhan Mantri Dakshta Aur Kushalta Sampann Hitgrahi (PM-DAKSH) Yojana through National Backward Classes Finance and Development Corporation (NBCFDC).">
+            <meta name="keywords" content="PM DAKSH Yojana">
+			
+			  {% elseif trimmed_path == 'skilling_partners' %}
+            <meta name="description" content="Explore our Skilling Partners, Under this scheme, loan assistance is available to Self Help Groups (SHGs) to provide credit facilities for the target group through nominated Channel Partners (State Channelising Agencies/Banks).">
+            <meta name="keywords" content="Explore our Skilling Partners">
+			
+			
+			        {% elseif trimmed_path == 'skilling-photo-gallery' %}
+            <meta name="description" content="Glimpses of Skill Training, Training Programme in Plastic Processing conducted by CIPET, Training Programme in Latex Harvest Technician by Rubber Skill Development Council, Training Programme in Sewing Machine Operator in Tripura, Training Programme in Bamboo Utility Handicrafts, Training Programme in Jaquard Handloom Weaver at Assam, Craft Festival 2017, Photographs under Livelihood Component of SEED scheme for Updation on Social Media Platform-reg.">
+            <meta name="keywords" content="Glimpses of Skill Training">
+			
+			        {% elseif trimmed_path == 'marketing_linkages' %}
+            <meta name="description" content="Marketing Linkages, A large number of the Backward Classes  are Artisans and Handicrafts persons. The targeted class is associated with traditional works. Keeping in view the changing market demand, the Corporation is constantly helping in various ways to expand the new technology and quality in this class of products so that products can meet the test of competition and the beneficiaries can earn profit.">
+            <meta name="keywords" content="Marketing Linkages">
+			
+			
+			        {% elseif trimmed_path == 'reports' %}
+            <meta name="description" content="Annual Reports, Explore our Annual Reports.">
+            <meta name="keywords" content="Annual Reports">
+			
+			        {% elseif trimmed_path == 'mou' %}
+            <meta name="description" content="MoU Documents, Explore our MoU Documents.">
+            <meta name="keywords" content="MoU Documents">
+			
+         {% elseif trimmed_path == 'tenders-vacancies' %}
+            <meta name="description" content="Tender, vacancies, Explore our current tenders and vacancies available.">
+            <meta name="keywords" content="Tender, vacancies">
+			
+			
+			        {% elseif trimmed_path == 'nbcfdcdashboard' %}
+            <meta name="description" content="NBCFDC Dashboard, Explore our NBCFDC Dashboard.">
+            <meta name="keywords" content="NBCFDC Dashboard">
+			
+			        {% elseif trimmed_path == 'contact-us' %}
+            <meta name="description" content="Contact Us, 5th Floor, NCUI Building, Siri Institutional Area, August Kranti Marg, New Delhi-110016">
+            <meta name="keywords" content="Contact Us">
+			
+			        {% elseif trimmed_path == 'achivement' %}
+            <meta name="description" content="Achievements, Explore our Achievements.">
+            <meta name="keywords" content="Achievements">
+			
+			
+			        {% elseif trimmed_path == 'artisan-product' %}
+            <meta name="description" content="Artisan Product, Explore our Artisan Product.">
+            <meta name="keywords" content="Artisan Product">
+			
+			        {% elseif trimmed_path == 'aspirational-district' %}
+            <meta name="description" content="Aspirational-District, Explore our Aspirational-District.">
+            <meta name="keywords" content="Aspirational-District">
+			
+			        {% elseif trimmed_path == 'awareness-camps' %}
+            <meta name="description" content="Awareness-camps, Explore our Awareness-camps.
+            <meta name="keywords" content="Awareness-camps">
+			
+			        {% elseif trimmed_path == 'backlog-vacanies' %}
+            <meta name="description" content="Backlog-Vacanies">
+            <meta name="keywords" content="Backlog-Vacanies">
+			
+			        {% elseif trimmed_path == 'bank' %}
+            <meta name="description" content="Bank, Explore our Bank">
+            <meta name="keywords" content="Bank">
+			
+			        {% elseif trimmed_path == 'code-business' %}
+            <meta name="description" content="Code of Business, Code of Business Conduct and Ethics for Board Members and Senior Management.">
+            <meta name="keywords" content="Code of Business Conduct and Ethics for Board Members and Senior Management">
+			{% elseif trimmed_path == 'employee-corner' %}
+            <meta name="description" content="Employee-Corner, Explore our Employee-corner.">
+            <meta name="keywords" content="Employee-Corner">
+			
+			        {% elseif trimmed_path == 'field-visi' %}
+            <meta name="description" content="Field-Visit, Explore our field-visit.">
+            <meta name="keywords" content="Field-Visit">
+			
+			        {% elseif trimmed_path == 'moa-aoa' %}
+            <meta name="description" content="Moa and Aoa, Memorandum of Association and Articles of Association.">
+            <meta name="keywords" content="Moa and Aoa">
+			
+			       {% elseif trimmed_path == 'photo-gallery' %}
+            <meta name="description" content="Photo Galleries, All Galleries.">
+            <meta name="keywords" content="Photo Galleries">
+			
+			
+			
+			       {% elseif trimmed_path == 'purchase_plan' %}
+            <meta name="description" content="Purchase Plan, Purchase Plan 2023-24.">
+            <meta name="keywords" content="Purchase Plan">
+			
+			
+			       {% elseif trimmed_path == 'skill-training' %}
+            <meta name="description" content="Skill-Training, Register For Skill Training Under PM Daksh.">
+            <meta name="keywords" content="Skill-Training">
+			
+			       {% elseif trimmed_path == 'faq' %}
+            <meta name="description" content="Visvas-FAQ"">
+            <meta name="keywords" content="VISVAS FAQ">
+			
+			       {% elseif trimmed_path == 'rti' %}
+            <meta name="description" content="RTI ACT 2005, DISCLOSUERS UNDER SECTION 4 OF THE RTI ACT.">
+            <meta name="keywords" content="RTI">
+			
+			       {% elseif trimmed_path == 'success_stories' %}
+            <meta name="description" content="Success Stories, In its thirty one years of existence, the Corporation has reached out to approximately 31 lakh beneficiaries belonging to backward communities spread across every State/UT of our country. Within its mandate of socio-economic empowerment of backward communities through any possible intervention, the concessional lending schemes run by the Corporation have been quite impactful.">
+            <meta name="keywords" content="Success Stories">
+			
+			       {% elseif trimmed_path == 'career' %}
+            <meta name="description" content="Career and Vacancies, Explore our Career and Vacancies.">
+            <meta name="keywords" content="Career and Vacancies">
+			
+			       {% elseif trimmed_path == 'notice' %}
+            <meta name="description" content="Notice">
+            <meta name="keywords" content="Notice">
+			
+			       {% elseif trimmed_path == 'nfobc' %}
+            <meta name="description" content="NFOBC, NBCFDC has been nominated as Nodal Agency for implementation of the scheme of National Fellowship for Other Backward Classes (NFOBC) funded by Ministry of Social Justice and Empowerment, Govt. of India, New Delhi. The scheme is open to candidates who belong to Other Backward Classes (OBCs) and are pursuing higher studies such as regular and full time M.Phil and Ph.D degrees in Humanities and Social Sciences, Engineering and Technology and Sciences. The total number of slots for NFOBC under the scheme is 1000 per year.">
+            <meta name="keywords" content="NFOBC">
+			
+			{% elseif trimmed_path == 'faq' %}
+            <meta name="description" content="FAQs, Explore our FAQs.">
+            <meta name="keywords" content="FAQs">
+			 
+			       {% elseif trimmed_path == 'csr-activity' %}
+            <meta name="description" content="CSR, Explore our CSR.">
+            <meta name="keywords" content="CSR">
+			
+			       {% elseif trimmed_path == 'other-schemes' %}
+            <meta name="description" content="Other Scheme, Performance Linked Grants-in-aid Scheme(PLGIA), Technology upgradation of Clusters, Awarness Camp.">
+            <meta name="keywords" content="Other Scheme">
+			
+			       {% elseif trimmed_path == 'rajbhasha' %}
+            <meta name="description" content="Rajbhasha, Various provisions of Official Language have been laid in Constitution of India under Part-17, Article 343 to 351. At the same time, various provisions have also been laid under Rajbhasha Act, 1963, Rajbhasha Resolution, 1968, Rajbhasha Rule, 1976 etc.">
+            <meta name="keywords" content="Rajbhasha">
+			
+			    {% elseif trimmed_path == 'publications' %}
+            <meta name="description" content="Publications, Publications, Explore our Publications.">
+            <meta name="keywords" content="Publications">
+			{% elseif trimmed_path == 'standard_formats' %}
+            <meta name="description" content="Standard formats, Standard formats, Explore our Standard formats.">
+            <meta name="keywords" content="Standard formats">
+			
+			       {% elseif trimmed_path == 'sdtp-institute' %}
+            <meta name="description" content="SDTP-Institute, SDTP-Institute, Explore our SDTP-Institute.">
+            <meta name="keywords" content="SDTP-Institute">
+			
+			       {% elseif trimmed_path == 'video-gallery' %}
+            <meta name="description" content="Video Gallery, Video Gallery, Explore our Video Gallery.">
+            <meta name="keywords" content="Video Gallery">
+			
+			   {% elseif trimmed_path == 'help' %}
+            <meta name="description" content="Help, The information of the Portal is accessible with different screen readers, such as JAWS, NVDA, SAFA, Supernova and Window-Eyes.">
+            <meta name="keywords" content="Help">
+			
+			   {% elseif trimmed_path == 'certifications' %}
+            <meta name="description" content="Certifications, Explore our Certifications">
+            <meta name="keywords" content="Certifications">
+			.
+			   {% elseif trimmed_path == 'terms_conditions' %}
+            <meta name="description" content="Terms and Conditions, This website is designed, developed and maintained by NBCFDC. Though all efforts have been made to ensure the accuracy and currency of the content on this website, the same should not be construed as a statement of law or used for any legal purposes. In case of any ambiguity or doubts, users are advised to verify/check with the Department(s) and/or other source(s), and to obtain appropriate professional advice.">
+            <meta name="keywords" content="Terms and Conditions">
+			
+			   {% elseif trimmed_path == 'web_information' %}
+            <meta name="description" content="Web Information Manager">
+            <meta name="keywords" content="Web Information Manager">
+			
+			       {% elseif trimmed_path == 'website-policies' %}
+            <meta name="description" content="Website Policies, No copyright protected third party content has been used in the NBCFDC website” Material featured on this portal may be reproduced free of charge in any format or media without requiring specific permission.">
+            <meta name="keywords" content="Website Policies">
+			
+			 
+			
+        {% elseif trimmed_path == 'tenders-vacancies' %}
+            <meta name="description" content="Tender,Explore our current tenders.">
+            <meta name="keywords" content="Tender">
+              
+        {% elseif trimmed_path == 'homepage' or current_path == path('<front>') %}
+            <meta name="description" content="National Backward Classes Finance and Development Corporation (NBCFDC)  is a Govt. of India Undertaking under the aegis of Ministry of Social Justice and Empowerment. NBCFDC was incorporated under Section 25 of the Companies Act 1956 on 13th January 1992 as a Company not for profit with an objective to promote economic and developmental activities for the benefit of Backward Classes and to assist the poorer section of these classes in skill development and self-employment ventures. NBCFDC provides financial assistance through State Channelizing Agencies (SCAs) nominated by the State Governments/UTs. NBCFDC also provides Micro Financing through SCAs/ Self Help Groups (SHGs).">
+            <meta name="keywords" content="NBCFDC">
+        {% else %}
+		
+            <meta name="description" content="National Backward Classes Finance and Development Corporation (NBCFDC)  is a Govt. of India Undertaking under the aegis of Ministry of Social Justice and Empowerment. NBCFDC was incorporated under Section 25 of the Companies Act 1956 on 13th January 1992 as a Company not for profit with an objective to promote economic and developmental activities for the benefit of Backward Classes and to assist the poorer section of these classes in skill development and self-employment ventures. NBCFDC provides financial assistance through State Channelizing Agencies (SCAs) nominated by the State Governments/UTs. NBCFDC also provides Micro Financing through SCAs/ Self Help Groups (SHGs).">
+            <meta name="keywords" content="NBCFDC">
+        {% endif %}
+    {% endif %}
+
+    {% if google_font == 'local' %}
+      <link rel="preload" as="font" href="{{ base_path ~ directory }}/fonts/open-sans.woff2" type="font/woff2" crossorigin>
+      <link rel="preload" as="font" href="{{ base_path ~ directory }}/fonts/roboto.woff2" type="font/woff2" crossorigin>
+    {% endif %}
+    
+    <css-placeholder token="{{ placeholder_token|raw }}">
+    <js-placeholder token="{{ placeholder_token|raw }}">
+    {% if css_extra %}
+      <style>
+        {{ css_code }}
+      </style>
+    {% endif %}
+  </head>
+  <body{{ attributes.addClass(body_classes) }} id="fontSize" onload="noBack();">
+    <a href="#main-content" class="visually-hidden focusable">
+      {{ 'Skip to main content'|t }}
+    </a>
+    {{ page_top }}
+    {{ page }}
+    {{ page_bottom }}
+    {% if google_font == 'googlecdn' %}
+      {{ attach_library('tara/googlefontscdn') }}
+    {% elseif google_font == 'local' %}
+      {{ attach_library('tara/googlefontslocal') }}
+    {% endif %}
+    <js-bottom-placeholder token="{{ placeholder_token|raw }}">
+
+    {% if slider_show and is_front %}  
+      <script>
+        jQuery(document).ready(function ($) {
+          $('.home-slider').owlCarousel({
+            items: 1,
+            loop: true,
+            autoplay: true,
+            nav: false,
+            dots: {{ slider_dots }},
+            autoplayTimeout: {{ slider_time }},
+          });
+        });
+      </script>
+    {% endif %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  let usingMouse = false;
+
+  // Detect mouse usage (any mouse movement)
+  window.addEventListener('mousemove', function() {
+    usingMouse = true;
+  });
+
+  // Detect when the user starts tabbing (keyboard navigation)
+  window.addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+      usingMouse = false;  // Disable mouse-based highlighting when tabbing
+    }
+  });
+
+  // Apply visual highlighting only for keyboard navigation (not mouse)
+  document.addEventListener('focusin', function(e) {
+    if (!usingMouse) {
+      e.target.classList.add('keyboard-focused'); // Add highlight class on focus
+    }
+  });
+
+  // Remove the highlight when focus leaves the element
+  document.addEventListener('focusout', function(e) {
+    if (!usingMouse) {
+      e.target.classList.remove('keyboard-focused'); // Remove highlight class
+    }
+  });
+
+  // Ensure focusable elements have tabindex and are in the tab order
+  const focusableElements = document.querySelectorAll('a,body, input, textarea,img, select, [tabindex]:not([tabindex="-1"])');
+  
+  focusableElements.forEach(el => {
+    if (!el.hasAttribute('tabindex')) {
+      el.setAttribute('tabindex', '0'); // Add tabindex 0 if not present
+    }
+  });
+});
+
+
+
+</script>
+
+<script>
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+      window.location.reload();
+    }
+  });
+</script>
+
+
+
+  </body>
+</html>

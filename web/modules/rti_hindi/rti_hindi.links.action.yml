@@ -1,0 +1,5 @@
+rti_hindi.rti_hindi_add:
+  route_name: rti_hindi.rti_hindi_add
+  # title: 'Add RTI'
+  appears_on:
+    - rti_hindi.rti_hindi_setting

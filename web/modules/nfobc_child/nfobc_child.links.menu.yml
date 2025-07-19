@@ -1,0 +1,5 @@
+nfobc_child.nfobc_child_setting:
+  title: 'Nfobc Sublink'
+  parent: nbcfdc.nbcfdc_setting
+  description: 'Update your Website From Here'
+  route_name: nfobc_child.nfobc_child_setting

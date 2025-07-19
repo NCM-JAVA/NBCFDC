@@ -1,0 +1,5 @@
+master.nbcfdc_master:
+  title: 'Master'
+  parent: system.admin
+  description: 'Add update the Master'
+  route_name: master.nbcfdc_master

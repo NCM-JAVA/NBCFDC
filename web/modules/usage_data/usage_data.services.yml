@@ -1,0 +1,6 @@
+services:
+  usage_data.storage.entity:
+    class: Drupal\usage_data\EntityStatisticsStorage
+    arguments: ['@database', '@state', '@request_stack', '@event_dispatcher']
+    tags:
+      - { name: backend_overridable }

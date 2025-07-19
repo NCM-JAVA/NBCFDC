@@ -1,0 +1,5 @@
+rti.rti_add:
+  route_name: rti.rti_add
+  title: 'Add RTI'
+  appears_on:
+    - rti.rti_setting

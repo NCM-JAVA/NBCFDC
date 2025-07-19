@@ -1,0 +1,5 @@
+rti_child.rti_add:
+  route_name: rti_child.rti_add_sublink
+  title: 'Add RTI Sublink'
+  appears_on:
+    - rti_child.rti_child_setting
